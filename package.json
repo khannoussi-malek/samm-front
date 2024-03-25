@@ -14,6 +14,7 @@
     "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.0",
     "@formiz/core": "2.2.3",
+    "@formiz/validations": "^2.0.1",
     "framer-motion": "11.0.20",
     "localforage": "1.10.0",
     "match-sorter": "6.3.4",

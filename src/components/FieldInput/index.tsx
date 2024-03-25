@@ -40,6 +40,7 @@ export const FieldInput = <FormattedValue = Value>(props: FieldInputProps<Format
         onFocus={() => field.setIsTouched(false)}
         onBlur={() => field.setIsTouched(true)}
         autoFocus={autoFocus}
+        
       />
     </FormGroup>
   );
