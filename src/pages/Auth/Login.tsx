@@ -4,6 +4,7 @@ import { isEmail } from '@formiz/validations';
 import { Formiz, useForm } from "@formiz/core";
 import { useState } from "react";
 import { BiBox } from "react-icons/bi";
+import { Link } from "react-router-dom";
 export const Login = () => {
     const [showSecretImage, setShowSecretImage] = useState(false);
     const form = useForm({
@@ -20,34 +21,23 @@ export const Login = () => {
                     {!showSecretImage && <Image src="./images/uni.png" alt="university image" />}
                 </Center>
                 <Center width="full" bg="gray.50" >
-                    <Flex flexDirection="column" bg="blue.50" borderRadius="xl" shadow="lg" p="8" h="80%" w="50%" justifyContent="center" >
-                        {/* <Box flex="1" display="flex" justifyContent="center">
-                            <HStack>
-                                <Box w="38px">
-                                    <Image src="./images/logo.svg" />
-                                </Box>
-                                <Box>
-                                    <Text as="b" fontSize="3xl" color="#01427A" >SAMM</Text>
-                                </Box>
-                            </HStack>
-                        </Box> */}
-
-                        <Box flex="1" display="flex" justifyContent="center" alignItems="center">
-                            <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(1, 1fr)" h="50px">
-                                <GridItem w="38px" h="40px" rowSpan={1} colSpan={1}>
-                                    <Image src="./images/logo.svg" />
-                                </GridItem>
-                                <GridItem rowSpan={1} colSpan={1}>
-                                    <Text as="b" fontSize="3xl" color="#01427A" >SAMM</Text>
-                                </GridItem>
-                                <GridItem rowSpan={1} colSpan={2}>
-                                    <Text as="b" fontSize="3xl" color="#01427A" >University</Text>
-                                </GridItem>
-                            </Grid>
-                        </Box>
+                    <Stack flexDirection="column" bg="blue.50" borderRadius="xl" shadow="lg" p="8" h="80%" w="50%" justifyContent="space-around" >
+                        <Stack>
+                            <Stack justifyContent="center" alignItems="center">
+                                <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(1, 1fr)">
+                                    <GridItem w="38px" h="40px" rowSpan={1} colSpan={1}>
+                                        <Image src="./images/logo.svg" />
+                                    </GridItem>
+                                    <GridItem rowSpan={1} colSpan={1}>
+                                        <Text as="b" fontSize="3xl" color="#01427A" >SAMM</Text>
+                                    </GridItem>
+                                    <GridItem rowSpan={1} colSpan={2}>
+                                        <Text as="b" fontSize="3xl" color="#01427A" >University</Text>
+                                    </GridItem>
+                                </Grid>
+                            </Stack>
 
 
-                        <Box flex="4" display="flex" alignItems="center" justifyContent="center">
                             <Formiz connect={form} autoForm>
                                 <Stack>
                                     <FieldInput
@@ -71,22 +61,30 @@ export const Login = () => {
                                         type="password"
                                         required="Password is required"
                                     />
+                                    <Text as={Link} to="/" textAlign="right" fontWeight="100" color="#01B3EF" fontSize="sm" textDecoration="underline">
+                                        Forgot password ?
+                                    </Text>
                                     <Button type="submit" colorScheme="blue">
                                         Login
                                     </Button>
                                 </Stack>
                             </Formiz>
-                        </Box>
-                        <Box flex="1" position='relative' padding='0px'>
+                        </Stack>
+                        <HStack >
+                            <Divider />
+                            <Text>Or</Text>
+                            <Divider />
+                        </HStack>
+                        {/* <Box position='relative' padding="8" bg="black">
                             <Divider colorScheme="blackAlpha" size="20px" variant="solid" />
                             <AbsoluteCenter bg='blue.50' px='4'>
                                 Or
                             </AbsoluteCenter>
-                        </Box>
+                        </Box> */}
                         <Button colorScheme="pink" onClick={() => { window.location.href = "/signup" }}>
-                            Sign in with google
+                            Sign Up
                         </Button>
-                    </Flex>
+                    </Stack>
                 </Center>
             </Flex>
         </Box>
