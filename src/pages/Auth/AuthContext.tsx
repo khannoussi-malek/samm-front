@@ -5,7 +5,7 @@ export type AuthContextType = {
     updateToken(token ?: string) : void ;
 } 
 
-const AUTH_TOKEN_KEY= "token";
+export const AUTH_TOKEN_KEY= "token";
 
 const AuthContext = createContext<AuthContextType|null>(null);
 
