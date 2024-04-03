@@ -15,7 +15,7 @@
     "@emotion/styled": "11.11.0",
     "@formiz/core": "2.2.3",
     "@formiz/validations": "^2.0.1",
-    "@tanstack/react-query": "^5.28.9",
+    "@tanstack/react-query": "4.29.12",
     "@tanstack/react-query-devtools": "5.25.0",
     "axios": "^1.6.8",
     "framer-motion": "11.0.20",

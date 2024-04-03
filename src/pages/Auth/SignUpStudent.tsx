@@ -1,13 +1,28 @@
 import { FieldInput } from "../../components/FieldInput";
-import { Box, Button, Center, Flex, HStack, Image, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, HStack, Image, Radio, RadioGroup, Stack, Text, useToast } from "@chakra-ui/react";
 import { isEmail } from '@formiz/validations';
 import { Formiz, useForm } from "@formiz/core";
 import { PhoneInput } from "../../components/PhoneInput";
 import { useState } from "react";
+import { useRegisterStudent, RegisterStudentPayload } from "./Auth.service";
 export const SignUpStudent = () => {
-    const form = useForm({
+    console.log(import.meta.env.VITE_BACKEND_API_URL)
+
+    const toastSuccess = useToast();
+
+    const { mutate: createStudent } = useRegisterStudent({
+        onSuccess: () => {
+            toastSuccess({
+                title: "waaaw nigaaaa",
+                status: 'success',
+
+            });
+        }
+    })
+    const form = useForm<RegisterStudentPayload>({
         onValidSubmit: (values) => {
             console.log(values);
+            createStudent(values);
         },
     });
     const [description, setDescription] = useState('1')
@@ -35,14 +50,14 @@ export const SignUpStudent = () => {
                                 <Stack>
                                     <HStack>
                                         <FieldInput
-                                            name="name"
+                                            name="nom"
                                             label="name"
                                             placeholder="Enter your name"
                                             type="name"
                                             required="name is required"
                                         />
                                         <FieldInput
-                                            name="surname"
+                                            name="prenom"
                                             label="surname"
                                             placeholder="Enter your family name"
                                             type="name"
@@ -108,7 +123,7 @@ export const SignUpStudent = () => {
                                         />}
                                     {description === '2' &&
                                         <FieldInput
-                                            name="Passeport"
+                                            name="passeport"
                                             label="Num Passeport"
                                             placeholder="place your Passeport number"
                                             type="number"

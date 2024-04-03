@@ -6,6 +6,7 @@ Axios.interceptors.request.use((config) => {
     if (!!token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
-    config.baseURL = process.env.BACKEND_API_URL;
+    console.log(import.meta.env.VITE_BACKEND_API_URL)
+    config.baseURL = import.meta.env.VITE_BACKEND_API_URL;
     return config;
 }, (error) => Promise.reject(error));

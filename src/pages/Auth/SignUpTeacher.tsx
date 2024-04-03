@@ -5,10 +5,13 @@ import { Formiz, useForm } from "@formiz/core";
 import { PhoneInput } from "../../components/PhoneInput";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { RegisterStudentPayload, useRegisterTeacher } from "./Auth.service";
 export const SignUpTeacher = () => {
-    const form = useForm({
+    const { mutate: createTeacher } = useRegisterTeacher()
+
+    const form = useForm<RegisterStudentPayload>({
         onValidSubmit: (values) => {
-            console.log(values);
+            createTeacher(values);
         },
     });
     const [description, setDescription] = useState('1')

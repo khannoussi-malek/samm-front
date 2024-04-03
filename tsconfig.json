@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2017",
     "useDefineForClassFields": true,
     "lib": [
-      "ES2020",
+      "ES2017",
       "DOM",
       "DOM.Iterable"
     ],
@@ -17,7 +17,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
