@@ -1,10 +1,9 @@
-import { FieldInput } from "../../components/FieldInput";
-import { AbsoluteCenter, Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Text } from "@chakra-ui/react";
-import { isEmail } from '@formiz/validations';
+import { Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Text } from "@chakra-ui/react";
 import { Formiz, useForm } from "@formiz/core";
+import { isEmail } from '@formiz/validations';
 import { useState } from "react";
-import { BiBox } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { FieldInput } from "../../components/FieldInput";
 export const Login = () => {
     const [showSecretImage, setShowSecretImage] = useState(false);
     const form = useForm({
@@ -36,8 +35,6 @@ export const Login = () => {
                                     </GridItem>
                                 </Grid>
                             </Stack>
-
-
                             <Formiz connect={form} autoForm>
                                 <Stack>
                                     <FieldInput
@@ -70,7 +67,7 @@ export const Login = () => {
                                 </Stack>
                             </Formiz>
                         </Stack>
-                        <HStack >
+                        <HStack>
                             <Divider />
                             <Text>Or</Text>
                             <Divider />
