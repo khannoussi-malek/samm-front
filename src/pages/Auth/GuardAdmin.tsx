@@ -1,10 +1,10 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { Loader } from './Loader';
+import { ErrorPage } from '../../components/ErrorPage';
+import { useAccount } from './service';
 
-import { ErrorPage } from '@/components/ErrorPage';
-import { useAccount } from '@/features/account/service';
-import { Loader } from '@/layout/Loader';
 
 export const GuardAdmin = ({ children }: { children: ReactNode }) => {
   const account = useAccount();

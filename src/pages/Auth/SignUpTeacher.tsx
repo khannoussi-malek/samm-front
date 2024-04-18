@@ -1,6 +1,6 @@
 import { FieldInput } from "../../components/FieldInput";
 import { Box, Button, Center, Flex, HStack, Image, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
-import { isEmail } from '@formiz/validations';
+import { isEmail, isNumber } from '@formiz/validations';
 import { Formiz, useForm } from "@formiz/core";
 import { PhoneInput } from "../../components/PhoneInput";
 import { useState } from "react";
@@ -88,6 +88,12 @@ export const SignUpTeacher = () => {
                                         label="phone number"
                                         placeholder="Enter your phone number"
                                         type="name"
+                                        validations={[
+                                            {
+                                                handler: isNumber(),
+                                                message: "phone number contain numbers only"
+                                            }
+                                        ]}
                                         required="surname is required"
                                     />
                                     <RadioGroup onChange={setDescription} value={description}>

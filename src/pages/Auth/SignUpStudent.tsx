@@ -1,6 +1,6 @@
 import { FieldInput } from "../../components/FieldInput";
 import { Box, Button, Center, Flex, HStack, Image, Radio, RadioGroup, Stack, Text, useToast } from "@chakra-ui/react";
-import { isEmail } from '@formiz/validations';
+import { isEmail, isNumber } from '@formiz/validations';
 import { Formiz, useForm } from "@formiz/core";
 import { PhoneInput } from "../../components/PhoneInput";
 import { useState } from "react";
@@ -25,6 +25,8 @@ export const SignUpStudent = () => {
             createStudent(values);
         },
     });
+    
+console.log({form})
     const [description, setDescription] = useState('1')
     return (
         <Box h="100vh" display="flex" justifyContent="center" alignItems="center" bg="#017da7">
@@ -91,6 +93,7 @@ export const SignUpStudent = () => {
                                             placeholder="reset your password"
                                             type="password"
                                             required="Password is required"
+                                        
                                         />
                                     </HStack>
                                     <PhoneInput
@@ -98,7 +101,13 @@ export const SignUpStudent = () => {
                                         label="phone number"
                                         placeholder="Enter your phone number"
                                         type="name"
-                                        required="surname is required"
+                                        required="surname is required"    
+                                        validations={[
+                                            {
+                                                handler: isNumber(),
+                                                message: "phone number contain numbers only"
+                                            }
+                                        ]}
                                     />
                                     <FieldInput
                                         name="Inscri"
@@ -128,6 +137,7 @@ export const SignUpStudent = () => {
                                             placeholder="place your Passeport number"
                                             type="number"
                                             required="Passeport is required"
+                                            
                                         />}
                                     <HStack justifyContent="space-evenly">
                                         <Button type="submit" colorScheme="blue" width="40%">

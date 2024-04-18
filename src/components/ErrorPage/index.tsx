@@ -39,7 +39,7 @@ export const ErrorPage = ({ errorCode }: { errorCode?: number }) => {
           textAlign={{ base: 'center', md: 'left' }}
           alignItems={{ base: 'center', md: 'flex-start' }}
         >
-          <Link href="/">
+          <Link to="/">
           <Image src="./images/logo.svg" />
           </Link>
           <Heading>Cant access this page</Heading>
@@ -51,7 +51,7 @@ export const ErrorPage = ({ errorCode }: { errorCode?: number }) => {
               fontSize="sm"
               mt={4}
             >
-              ERROR
+              ERROR {errorCode}
             </Text>
           )}
         </Stack>

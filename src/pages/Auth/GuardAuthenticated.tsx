@@ -3,9 +3,9 @@
 import { ReactNode } from 'react';
 
 import { Navigate, useLocation } from 'react-router-dom';
+import { Loader } from './Loader';
+import { useAuthContext } from './AuthContext';
 
-import { useAuthContext } from '@/features/auth/AuthContext';
-import { Loader } from '@/layout/Loader';
 
 export const GuardAuthenticated = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, isLoading } = useAuthContext();

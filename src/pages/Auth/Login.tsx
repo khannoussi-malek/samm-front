@@ -2,7 +2,7 @@ import { Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Image, Stac
 import { Formiz, useForm } from "@formiz/core";
 import { isEmail } from '@formiz/validations';
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FieldInput } from "../../components/FieldInput";
 export const Login = () => {
     const [showSecretImage, setShowSecretImage] = useState(false);
@@ -12,6 +12,8 @@ export const Login = () => {
             console.log(values);
         },
     });
+    let navigate = useNavigate();
+
     return (
         <Box h="100vh" display="flex" justifyContent="center" alignItems="center" bg="#017da7">
             <Flex h="90vh" width="80%" >
@@ -78,7 +80,7 @@ export const Login = () => {
                                 Or
                             </AbsoluteCenter>
                         </Box> */}
-                        <Button colorScheme="pink" onClick={() => { window.location.href = "/signup" }}>
+                        <Button colorScheme="pink" onClick={() => {navigate('/signupStudent') }}>
                             Sign Up
                         </Button>
                     </Stack>
