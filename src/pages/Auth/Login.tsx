@@ -4,12 +4,15 @@ import { isEmail } from '@formiz/validations';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FieldInput } from "../../components/FieldInput";
+import { useLogin } from "./Auth.service";
 const Login = () => {
+
+    const {mutate:login} = useLogin();
     const [showSecretImage, setShowSecretImage] = useState(false);
     const form = useForm({
         onValidSubmit: (values) => {
             setShowSecretImage(values.email === "sami@gmail.com");
-            console.log(values);
+            login(values)
         },
     });
     let navigate = useNavigate();

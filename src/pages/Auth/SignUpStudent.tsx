@@ -5,17 +5,24 @@ import { Formiz, useForm } from "@formiz/core";
 import { PhoneInput } from "../../components/PhoneInput";
 import { useState } from "react";
 import { useRegisterStudent, RegisterStudentPayload } from "./Auth.service";
+import { useNavigate } from "react-router-dom";
 export const SignUpStudent = () => {
-    console.log(import.meta.env.VITE_BACKEND_API_URL)
 
     const toastSuccess = useToast();
 
+    const navigate = useNavigate();
     const { mutate: createStudent } = useRegisterStudent({
         onSuccess: () => {
             toastSuccess({
                 title: "waaaw nigaaaa",
                 status: 'success',
-
+            });
+            navigate('/login')
+        },
+        onError:(error)=>{
+            toastSuccess({
+                title: error.response.data.message[0],
+                status: 'error',
             });
         }
     })
