@@ -4,7 +4,7 @@ import { isEmail } from '@formiz/validations';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FieldInput } from "../../components/FieldInput";
-export const Login = () => {
+const Login = () => {
     const [showSecretImage, setShowSecretImage] = useState(false);
     const form = useForm({
         onValidSubmit: (values) => {
@@ -80,7 +80,7 @@ export const Login = () => {
                                 Or
                             </AbsoluteCenter>
                         </Box> */}
-                        <Button colorScheme="pink" onClick={() => {navigate('/signupStudent') }}>
+                        <Button colorScheme="pink" onClick={() => { navigate('/signupStudent') }}>
                             Sign Up
                         </Button>
                     </Stack>
@@ -89,3 +89,4 @@ export const Login = () => {
         </Box>
     );
 }
+export default Login;

@@ -1,5 +1,4 @@
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Login } from './pages/Auth/Login';
 import { SignUpStudent } from './pages/Auth/SignUpStudent';
 import { SignUpTeacher } from './pages/Auth/SignUpTeacher';
 import { GuardPublicOnly } from './pages/Auth/GuardPublicOnly';
@@ -7,6 +6,10 @@ import { ErrorPage } from './components/ErrorPage';
 import { Layout } from './layout/Layout';
 import { GuardAuthenticated } from './pages/Auth/GuardAuthenticated';
 import PageLogout from './pages/Auth/PageLogout';
+import { StudentList } from './pages/StudentList/StudentList';
+import { lazy } from 'react';
+
+const Login = lazy(()=>import('./pages/Auth/Login'));
 
 const Root = () => {
   const allRoutes= [
@@ -26,6 +29,7 @@ const Root = () => {
       { path: 'login', element: <GuardPublicOnly><Login/></GuardPublicOnly> }, 
       { path: 'signupStudent', element: <GuardPublicOnly><SignUpStudent/></GuardPublicOnly> },
       {path:'signupTeacher',element:<GuardPublicOnly><SignUpTeacher/></GuardPublicOnly>},
+      {path:'List',element:<GuardPublicOnly><StudentList/></GuardPublicOnly>},
       {
         path: '',
         element: (
