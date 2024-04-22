@@ -3,7 +3,7 @@ import {
   UseQueryOptions,
   useQuery
 } from '@tanstack/react-query';
-import { Axios } from 'axios';
+import Axios  from 'axios';
 
 
 export const accountKeys = createQueryKeys('accountService', {
@@ -14,13 +14,11 @@ export const accountKeys = createQueryKeys('accountService', {
 type User = any
 type UseAccountQueryOptions = UseQueryOptions<User>;
 export const useAccount = (queryOptions: UseAccountQueryOptions = {}) => {
-  return { nope: true, isLoading: false, isAdmin: false, data: {} };
    const query = useQuery({
      queryKey: accountKeys.account.queryKey,
      queryFn: async () => {
-       const response = await Axios.get('/account');
-       const data = zUser().parse(response.data);
-       return data;
+       const response = await Axios.get('/auth/info');
+       return response?.data;
      },
      ...queryOptions,
    });

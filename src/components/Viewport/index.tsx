@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 import { Flex, FlexProps, useMediaQuery } from '@chakra-ui/react';
+import { isBrowser } from '../../lib/ssr';
 
 
 const useFixViewport = () => {
-  const isBrowser = true;
   useEffect(() => {
     const updateCssViewportHeight = () => {
       const vh = window.innerHeight * 0.01;
@@ -30,7 +30,7 @@ export const Viewport = (props: FlexProps) => {
 
   return (
     <Flex
-      direction="column"
+      direction="row"
       overflowX="auto"
       minH="100vh"
       w="full"

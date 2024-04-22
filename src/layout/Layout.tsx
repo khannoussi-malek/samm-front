@@ -5,10 +5,12 @@ import { Flex, useDisclosure } from '@chakra-ui/react';
 import { Viewport } from '../components/Viewport';
 import { LayoutContext } from '../components/Viewport/LayoutContext';
 import { TopBar } from './TopBar';
+import { useAuthContext } from '../pages/Auth/AuthContext';
 
 export const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const [isFocusMode, setIsFocusMode] = useState(false);
   const nav = useDisclosure();
+  const { isAuthenticated } = useAuthContext();
 
   const providerValue = useMemo(
     () => ({
@@ -24,8 +26,8 @@ export const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   return (
     <LayoutContext.Provider value={providerValue}>
       <Viewport>
-        {!!isFocusMode && <TopBar />}
-        <Flex flex="1" direction="column">
+        {isAuthenticated &&!isFocusMode && <TopBar />} 
+        <Flex direction="column" flex="1" minW="0">
           {children}
         </Flex>
       </Viewport>

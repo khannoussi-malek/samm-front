@@ -6,16 +6,9 @@ import { useLayoutContext } from '../components/Viewport/LayoutContext';
 
 export const MainMenu = ({ ...rest }) => {
   return (
-    <Stack direction="row" spacing="1" {...rest}>
-      {/* <MainMenuItem to="/">{t('layout:mainMenu.dashboard')}</MainMenuItem> */}
-      <MainMenuItem to="/actifsprimaires">Actifs Primaires</MainMenuItem>
-      <MainMenuItem to="/actifssupport">Actifs support</MainMenuItem>
-      <MainMenuItem to="/damagest">Dommages</MainMenuItem>
-      <MainMenuItem to="/triggerevents">Trigger events</MainMenuItem>
-      <MainMenuItem to="/riskSheets">Fiches de risque</MainMenuItem>
-      {/* {isAdmin && (
-        <MainMenuItem to="/admin">{t('layout:mainMenu.admin')}</MainMenuItem>
-      )} */}
+    <Stack direction="column" spacing="1" {...rest}>
+      <MainMenuItem to="/example">Example</MainMenuItem>
+    
     </Stack>
   );
 };

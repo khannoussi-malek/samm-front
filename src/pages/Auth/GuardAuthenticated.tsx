@@ -10,7 +10,7 @@ import { useAuthContext } from './AuthContext';
 export const GuardAuthenticated = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, isLoading } = useAuthContext();
   const { pathname } = useLocation();
-
+console.log(isAuthenticated)
   if (isLoading) {
     return <Loader />;
   }

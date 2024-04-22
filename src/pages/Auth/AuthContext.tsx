@@ -37,6 +37,7 @@ return(
     </AuthContext.Provider>
 );
 };
+
 export const useAuthContext = ()=>{
 const [isLoading,setIsLoading] = useState(true);
 useEffect(()=>{setIsLoading(false)},[]);

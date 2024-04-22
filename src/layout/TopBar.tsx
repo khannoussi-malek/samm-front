@@ -1,6 +1,7 @@
 
 import {
   Box,
+  Center,
   Flex,
   IconButton,
   IconButtonProps,
@@ -16,31 +17,38 @@ import { MainMenu } from './MainMenu';
 import { NavDrawer } from './NavDrawer';
 
 const MenuButton = (props: Partial<IconButtonProps>) => {
-  const { navOnOpen } = useLayoutContext();
+  const { navOnOpen,navOnClose, navIsOpen} = useLayoutContext();
   return (
     <IconButton
       aria-label="Navigation"
       icon={<LuMenu size="1.5em" />}
-      onClick={navOnOpen}
+      onClick={!navIsOpen?navOnOpen:navOnClose}
       variant="unstyled"
       _active={{ bg: 'gray.700' }}
       _hover={{ bg: 'gray.900' }}
+      borderRadius="0"
+      borderBottomEndRadius="xl"
       {...props}
     />
   );
 };
 
 export const TopBar = () => {
+  const { navIsOpen } = useLayoutContext();
 
   const showDrawer = useBreakpointValue(
     {
       base: true,
-      md: false,
-    },
-    { ssr: false }
+      lg: false,
+    }
   );
+  
 
-  return (
+  return showDrawer ?
+( <> <MenuButton  bg="blue.600" pl="1" />
+       <NavDrawer />
+</>):
+  (
     <>
       <SlideFade in offsetY={-40} style={{ zIndex: 2 }}>
         <Flex
@@ -52,27 +60,25 @@ export const TopBar = () => {
           align="center"
           pt="safe-top"
           px="4"
-          h="calc(4rem + env(safe-area-inset-top))"
-          bg="gray.800"
+          h="full"
+           bg="gray.800"
+          border="2px solid"
+          w="20rem"
           _dark={{ bg: 'gray.900' }}
+          direction="column"
+          alignItems="stretch"
         >
-          {!!showDrawer && <MenuButton ms="-0.5rem" />}
-          <Box
-            as={Link}
-            to="/"
-            mx={{ base: 'auto',md: 0 }}
-          >
+        <Center as={Link}
+          to="/" >
+        
           <Image src="./images/logo.svg" mt="4" h="4rem" />
-
-          </Box>
+          </Center>
           <Box me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
-          <MainMenu me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
+           <MainMenu me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
           {/* <AccountMenu /> */}
         </Flex>
       </SlideFade>
-      <Box h="calc(4rem + env(safe-area-inset-top))" />
-      {<NavDrawer />}
-      {showDrawer && <NavDrawer />}
+      <Box w={!navIsOpen?"20rem":"0rem"} />
     </>
   );
 };

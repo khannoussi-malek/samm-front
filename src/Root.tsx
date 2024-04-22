@@ -10,7 +10,7 @@ import { StudentList } from './pages/StudentList/StudentList';
 import { lazy } from 'react';
 
 const Login = lazy(()=>import('./pages/Auth/Login'));
-
+const PageHome  = lazy(()=>import('./pages/Home/PageHome'))
 const Root = () => {
   const allRoutes= [
         /**
@@ -35,41 +35,21 @@ const Root = () => {
         element: (
           <GuardAuthenticated>
             <Layout>
-              <Outlet />
-            </Layout>
+              <Outlet /></Layout>
           </GuardAuthenticated>
         ),
         children:[
-          
+          {
+            element: <Navigate to="home" replace />,
+          },
+          {
+            path: 'home',
+            element: <PageHome />,
+          },
         ]
       }
     ]
-   }, 
-  
-       /**
-       * Authenticated Routes
-       */
-       {
-        path: '',
-        element: (
-          <GuardAuthenticated>
-            <Layout>
-              <Outlet />
-            </Layout>
-          </GuardAuthenticated>
-        ),
-        children: [
-          {
-            path: '',
-            // redirect to actifsprimaires
-
-            element: <Navigate to="dashboard" replace />,
-          },
-
-    
-          { path: '*', element: <ErrorPage errorCode={404} /> },
-        ],
-      },
+   },
   { path: '*', element: <ErrorPage errorCode={404} /> },
 
   ]
