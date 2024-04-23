@@ -11,7 +11,7 @@ import { useListNews } from "./new.service";
     const {news,isLoading,isError,refetch}=useListNews();
     const {isAdmin} = useAccount();
     return (<Page containerSize="xl" >
-        <PageContent  >
+            <PageContent  >
             <Heading>News</Heading>
             <p>News content</p>
             {isAdmin &&<Stack direction="row" spacing={4} justifyContent="flex-end" >
@@ -21,11 +21,13 @@ import { useListNews } from "./new.service";
             {isError && <Center ><Button onClick={()=>refetch()} >Refetch</Button></Center>}
             {!news?.length && <Center ><p>No news</p></Center>}
             <Stack>
-            {!!news && news.map((aNew)=>(
-                <Box id={`${aNew.id}`}>
-                    <Heading>{aNew.title}</Heading>
-                    <p>{aNew.content}</p>
-                </Box>) )}</Stack>
+                {!!news && news.map((aNew)=>(
+                    <Box id={`${aNew.id}`}>
+                        <Heading>{aNew.title}</Heading>
+                        <Box dangerouslySetInnerHTML={{ __html: aNew.content }} />
+                    </Box>) 
+                )}
+            </Stack>
             </PageContent>
             </Page>);
     };
