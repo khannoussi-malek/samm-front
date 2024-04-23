@@ -1,0 +1,41 @@
+.wysiwyg-editor h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.wysiwyg-editor h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+.wysiwyg-editor h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+.wysiwyg-editor h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+.wysiwyg-editor h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+.wysiwyg-editor h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0;
+}
+
+.wysiwyg-editor blockquote {
+  border-left: 5px solid #eee;
+  margin: 0;
+  padding: 0 1em;
+  color: #aaa;
+}
+
+.wysiwyg-editor blockquote p {
+  margin: 0.5em 0;
+  padding-left: 0.5em;
+}

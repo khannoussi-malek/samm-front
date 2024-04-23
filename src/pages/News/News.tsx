@@ -1,10 +1,10 @@
 import { Box, Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
-import { LuFilePlus, LuPlus } from "react-icons/lu";
+import { LuPlus } from "react-icons/lu";
+import { Link } from "react-router-dom";
 import { Page, PageContent } from "../../components/Page";
 import { ResponsiveIconButton } from "../../components/ResponsiveIconButton";
 import { useAccount } from "../Auth/service";
 import { useListNews } from "./new.service";
-import { Link } from "react-router-dom";
 
 
  const News = () => {
@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
             <Heading>News</Heading>
             <p>News content</p>
             {isAdmin &&<Stack direction="row" spacing={4} justifyContent="flex-end" >
-                 <ResponsiveIconButton as={Link} to="./admin/news" icon={<LuPlus />} children="Add news" />
+                 <ResponsiveIconButton as={Link} to="/admin/news" icon={<LuPlus />} children="Add news" />
             </Stack>}
             {isLoading && <Center ><Spinner /></Center>}
             {isError && <Center ><Button onClick={()=>refetch()} >Refetch</Button></Center>}

@@ -106,7 +106,7 @@ export const PageTopBar = ({
               <Box>
                 <IconButton
                   aria-label="Go Back"
-                  icon={<LuArrowLeft />}
+                  icon={LuArrowLeft}
                   onClick={() => onBack()}
                 />
               </Box>
