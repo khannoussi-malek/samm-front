@@ -12,6 +12,7 @@ import { SignUpStudent } from './pages/Auth/SignUpStudent';
 import { SignUpTeacher } from './pages/Auth/SignUpTeacher';
 import { GuardPublicOnly } from './pages/Auth/GuardPublicOnly';
 
+const News = lazy(() => import('./pages/News/News'));
 const AdminRouter = lazy(() => import('./pages/Admin/AdminRouter'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const PageHome = lazy(() => import('./pages/Home/PageHome'))
@@ -71,6 +72,15 @@ const Root = () => {
                   </GuardAdmin>
                 }
               />
+                <Route
+                path="News"
+                element={
+                  <GuardAuthenticated>
+                    <News />
+                  </GuardAuthenticated>
+                }
+              />
+              
               <Route path="*" element={<ErrorPage errorCode={404} />} />
             </Routes>
           </Suspense>

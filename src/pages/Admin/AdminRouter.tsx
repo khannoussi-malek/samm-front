@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ErrorPage } from "../../components/ErrorPage";
 import { lazy } from "react";
 
@@ -8,6 +8,7 @@ const AdminUsersRoutes = lazy(() => import('./Users/AdminUsersRoutes'));
 
     return(
         <Routes>
+          <Route path="/" element={<Navigate to="users" replace />} />
         <Route path="users/*" element={<AdminUsersRoutes />} />
         <Route path="*" element={<ErrorPage errorCode={404} />} /> 
       </Routes>

@@ -1,12 +1,10 @@
 
 import {
   Box,
-  Center,
   Flex,
   HStack,
   IconButton,
   IconButtonProps,
-  Image,
   SlideFade,
   Stack,
   Text,
@@ -15,10 +13,11 @@ import {
 import { LuMenu } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 
+import { Logo } from '../components/Logo';
 import { useLayoutContext } from '../components/Viewport/LayoutContext';
+import { AccountMenu } from './AccountMenu';
 import { MainMenu } from './MainMenu';
 import { NavDrawer } from './NavDrawer';
-import { AccountMenu } from './AccountMenu';
 
 const MenuButton = (props: Partial<IconButtonProps>) => {
   const { navOnOpen,navOnClose, navIsOpen} = useLayoutContext();
@@ -78,8 +77,8 @@ export const TopBar = () => {
           to="/" 
           gap='4' 
           alignItems="center">
-        
-          <Image src="./images/logo.svg" mt="4" h="4rem" /> <Text mt="4"color="blue.800" fontWeight="bold" fontSize="4xl">SAMM</Text>
+        <Logo />
+          <Text mt="4"color="blue.800" fontWeight="bold" fontSize="4xl">SAMM</Text>
           </HStack>
           <Box me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
            <MainMenu me="auto" ms="4" display={{ base: 'none', md: 'flex' }} /></Stack>
