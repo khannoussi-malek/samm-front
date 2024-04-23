@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Spinner, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Spinner, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { useStudentList } from "./students.service";
 
 export const StudentList = () => {
