@@ -33,7 +33,7 @@ export const useAccount = (queryOptions: UseAccountQueryOptions = {}) => {
      },
      ...queryOptions,
    });
-   const isAdmin = !!query.data?.authorities?.includes('ROLE_ADMIN');
+   const isAdmin = query.data?.role === 'Admin';
    return { isAdmin, ...query };
 };
 

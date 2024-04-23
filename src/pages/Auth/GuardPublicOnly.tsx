@@ -10,7 +10,7 @@ import { Loader } from './Loader';
 export const GuardPublicOnly = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, isLoading } = useAuthContext();
   const [searchParams] = useSearchParams();
-console.log("isAuthenticated",isAuthenticated)
+  
   if (isLoading) {
     return <Loader />;
   }

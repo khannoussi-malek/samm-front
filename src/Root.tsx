@@ -1,61 +1,83 @@
-import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ErrorPage } from './components/ErrorPage';
+import { Layout } from './layout/Layout';
+import { GuardAdmin } from './pages/Auth/GuardAdmin';
+import { GuardAuthenticated } from './pages/Auth/GuardAuthenticated';
+import { Loader } from './pages/Auth/Loader';
+import PageLogout from './pages/Auth/PageLogout';
 import { SignUpStudent } from './pages/Auth/SignUpStudent';
 import { SignUpTeacher } from './pages/Auth/SignUpTeacher';
 import { GuardPublicOnly } from './pages/Auth/GuardPublicOnly';
-import { ErrorPage } from './components/ErrorPage';
-import { Layout } from './layout/Layout';
-import { GuardAuthenticated } from './pages/Auth/GuardAuthenticated';
-import PageLogout from './pages/Auth/PageLogout';
-import { StudentList } from './pages/StudentList/StudentList';
-import { lazy } from 'react';
 
+const AdminRouter = lazy(() => import('./pages/Admin/AdminRouter'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const PageHome = lazy(() => import('./pages/Home/PageHome'))
 const Root = () => {
-  const allRoutes = [
-    /**
-   * Public Routes
-   */
-    {
-      path: '/',
-      errorElement: <ErrorPage />,
-      element: (<>
-        <Outlet /></>
-      ),
-      children: [
-        {
-          path: 'logout',
-          element: <PageLogout />,
-        },
-        { path: 'login', element: <GuardPublicOnly><Login /></GuardPublicOnly> },
-        { path: 'signupStudent', element: <GuardPublicOnly><SignUpStudent /></GuardPublicOnly> },
-        { path: 'signupTeacher', element: <GuardPublicOnly><SignUpTeacher /></GuardPublicOnly> },
-        { path: 'List', element: <GuardPublicOnly><StudentList /></GuardPublicOnly> },
-        {
-          path: '',
-          element: (
-            <GuardAuthenticated>
-              <Layout>
-                <Outlet /></Layout>
-            </GuardAuthenticated>
-          ),
-          children: [
-            {
-              element: <Navigate to="home" replace />,
-            },
-            {
-              path: 'home',
-              element: <PageHome />,
-            },
-          ]
-        }
-      ]
-    },
-    { path: '*', element: <ErrorPage errorCode={404} /> },
-
-  ]
-  const router = createBrowserRouter(allRoutes);
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary>
+      <BrowserRouter basename="/">
+        <Layout>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route
+                path="login"
+                element={
+                  <GuardPublicOnly>
+                    <Login />
+                  </GuardPublicOnly>
+                }
+              />
+              <Route
+                path="signupStudent"
+                element={
+                  <GuardPublicOnly>
+                    <SignUpStudent />
+                  </GuardPublicOnly>
+                }
+              />
+              <Route
+                path="signupTeacher"
+                element={
+                  <GuardPublicOnly>
+                    <SignUpTeacher />
+                  </GuardPublicOnly>
+                }
+              />
+              <Route
+                path="logout"
+                element={
+                  <ErrorBoundary>
+                    <PageLogout />
+                  </ErrorBoundary>
+                }
+              />
+              <Route
+                path="home"
+                element={
+                  <GuardAuthenticated>
+                    <PageHome />
+                  </GuardAuthenticated>
+                }
+              />
+              <Route
+                path="admin/*"
+                element={
+                  <GuardAdmin>
+                    <AdminRouter />
+                  </GuardAdmin>
+                }
+              />
+              <Route path="*" element={<ErrorPage errorCode={404} />} />
+            </Routes>
+          </Suspense>
+        </Layout>
+      </BrowserRouter>
+    </ErrorBoundary>
+  );
 };
 
 export default Root;

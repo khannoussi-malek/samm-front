@@ -4,11 +4,14 @@ import { useRtl } from './hooks/useRtl';
 import { useLayoutContext } from '../components/Viewport/LayoutContext';
 import { FC, PropsWithChildren } from 'react';
 import { Icon } from '../components/Icon';
+import { useAccount } from '../pages/Auth/service';
 
 
 export const MainMenu = ({ ...rest }) => {
+  const {isAdmin} = useAccount();
   return (
     <Stack direction="column" spacing="4" w="90%" {...rest}>
+      {!!isAdmin&&<MainMenuItem to="/admin/users">Users</MainMenuItem>}
       <MainMenuItem to="/">News</MainMenuItem>
       <MainMenuItem to="/catchup">Catch-up</MainMenuItem>
       <MainMenuItem to="/courses">Courses</MainMenuItem>

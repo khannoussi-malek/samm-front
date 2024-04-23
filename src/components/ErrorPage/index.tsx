@@ -43,7 +43,8 @@ export const ErrorPage = ({ errorCode }: { errorCode?: number }) => {
           <Image src="./images/logo.svg" />
           </Link>
           <Heading>Cant access this page</Heading>
-          <Text>Pleas verify if you have the access to this page</Text>
+          <Text>
+            {errorCode!==404?"not authorized":"not found"}</Text>
           {!!errorCode && (
             <Text
               color="gray.800"
