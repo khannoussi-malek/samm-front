@@ -6,6 +6,7 @@ import { Viewport } from '../components/Viewport';
 import { LayoutContext } from '../components/Viewport/LayoutContext';
 import { TopBar } from './TopBar';
 import { useAuthContext } from '../pages/Auth/AuthContext';
+import { LoginModalInterceptor } from '../pages/Auth/LoginModalInterceptor';
 
 export const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const [isFocusMode, setIsFocusMode] = useState(false);
@@ -30,6 +31,8 @@ export const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
         <Flex direction="column" flex="1" minW="0">
           {children}
         </Flex>
+        <LoginModalInterceptor />
+
       </Viewport>
     </LayoutContext.Provider>
   );
