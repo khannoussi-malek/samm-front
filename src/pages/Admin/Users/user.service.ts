@@ -1,0 +1,27 @@
+import { createQueryKeys } from "@lukemorales/query-key-factory";
+import { UseQueryOptions, useQuery } from "@tanstack/react-query";
+import { User } from "../../Auth/service";
+import Axios from "axios";
+
+export const userKeys = createQueryKeys('users', {
+  list: (role: string) => [role || "all"],
+});
+
+type ListUsersQueryOptions = UseQueryOptions<User[]>;
+
+export const useListUsers = (role?: string, queryOptions: ListUsersQueryOptions = {}) => {
+
+  const query = useQuery({
+    queryKey: userKeys.list(role).queryKey,
+    queryFn: async () => {
+      const params = role ? { role } : {};
+      const response = await Axios.get("/users", {
+        params
+      });
+      return response?.data;
+    },
+    ...queryOptions,
+  });
+
+  return { ...query, users: query.data || [] };
+};
