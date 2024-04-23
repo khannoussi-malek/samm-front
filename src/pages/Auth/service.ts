@@ -7,12 +7,23 @@ import Axios  from 'axios';
 
 
 export const accountKeys = createQueryKeys('accountService', {
-  account: null,
-  accountForm: null,
+  account: ["account"],
 });
 
-type User = any
+type role = 'teacher' | 'Student'|'Admin'
+type User = {
+  id: number;
+  nom: string;
+  prenom: string;
+  email: string;
+  phone: string;
+  photo: string;
+  CIN: string;
+  passport: string;
+  role: role;
+}
 type UseAccountQueryOptions = UseQueryOptions<User>;
+
 export const useAccount = (queryOptions: UseAccountQueryOptions = {}) => {
    const query = useQuery({
      queryKey: accountKeys.account.queryKey,
