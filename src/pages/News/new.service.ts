@@ -5,6 +5,7 @@ import Axios, { AxiosError }  from "axios";
 
 export const newsKeys = createQueryKeys('news', {
     list: ["list"],
+    get: (id: number) => [ { id }],
   });
 
 
@@ -22,6 +23,7 @@ export const newsKeys = createQueryKeys('news', {
     visibility: boolean;
   }
 type NewsQueryOptions = UseQueryOptions<NewsType[]>;
+type GetNewsQueryOptions = UseQueryOptions<NewsType>;
 
 type NewsMutationOptions = UseMutationOptions<any, AxiosError,CreatNewsType>;
 
@@ -52,3 +54,15 @@ type NewsMutationOptions = UseMutationOptions<any, AxiosError,CreatNewsType>;
   )
 
 }
+
+export const useNews =  (id:number,queryOptions: GetNewsQueryOptions = {}) => {
+  const query = useQuery({
+    queryKey: newsKeys.get(id).queryKey,
+    queryFn: async () => {
+      const response = await Axios.get('/news/'+id);
+      return response?.data;
+    },
+    ...queryOptions,
+  });
+  return { ...query, news:query.data||[] };
+};

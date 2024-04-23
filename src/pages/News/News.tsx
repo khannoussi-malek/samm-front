@@ -20,11 +20,11 @@ import { useListNews } from "./new.service";
             {isLoading && <Center ><Spinner /></Center>}
             {isError && <Center ><Button onClick={()=>refetch()} >Refetch</Button></Center>}
             {!news?.length && <Center ><p>No news</p></Center>}
-            <Stack>
+            <Stack spacing={4}>
                 {!!news && news.map((aNew)=>(
-                    <Box id={`${aNew.id}`}>
+                    <Box as={Link} to={`/news/${aNew.id}`} bg="blue.800" borderRadius="xl" color="gray.50" p="4" id={`${aNew.id}`}>
                         <Heading>{aNew.title}</Heading>
-                        <Box dangerouslySetInnerHTML={{ __html: aNew.content }} />
+                        {/* <Box dangerouslySetInnerHTML={{ __html: aNew.content }} /> */}
                     </Box>) 
                 )}
             </Stack>
