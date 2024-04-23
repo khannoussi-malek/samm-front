@@ -3,11 +3,9 @@ import { isEmail, isNumber } from "@formiz/validations";
 import { FieldInput } from "../../../components/FieldInput";
 import { PhoneInput } from "../../../components/PhoneInput";
 import { useState } from "react";
+import { FieldSelect } from "../../../components/FieldSelect";
 
 export const UserForm = () => {
-    // only the field without formiz
-    const [role, setRole] = useState("");
-
     return (<Stack>
         <HStack>
             <FieldInput
@@ -69,11 +67,16 @@ export const UserForm = () => {
             type="password"
         />
         </HStack>
-        <Select onChange={(e) => { setRole(e.target.value) }} placeholder='Select Role'>
-                    <option value='Student'>Student</option>
-                    <option value='teacher'>Teacher</option>
-                    <option value='Admin'>Admin</option>
-                </Select>
+
+
+        <FieldSelect name="role" label="Role" options={[
+                { value: 'Student', label: 'Student' },
+                { value: 'teacher', label: 'Teacher' },
+                { value: 'Admin', label: 'Admin' },
+            ]}
+            placeholder="Select a role"
+            required="Role is required"
+        />
         <HStack>
         <FieldInput
             name="CIN"
