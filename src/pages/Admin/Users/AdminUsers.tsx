@@ -1,8 +1,9 @@
-import { Box, Button, Center, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Spinner, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
+import { Button, Center, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Spinner, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import { useListUsers } from "./user.service";
 import { Page, PageContent } from "../../../components/Page";
 import { useState } from "react";
 import { User } from "../../Auth/service";
+import { AdminUserUpdateModal } from "./AdminUserUpdateModal";
 
 const AdminUsers = () => {
     const [role, setRole] = useState("");
@@ -32,10 +33,10 @@ const AdminUsers = () => {
                                 <Th>name </Th>
                                 <Th>email</Th>
                                 <Th>phone</Th>
+                                <Th></Th>
                             </Tr>
                         </Thead>
-
-                        {isError && <p>there is a error <Button onClick={() => refetch()}>Refresh</Button></p>}
+                        {!!isError && <Button onClick={() => { refetch() }}>Refresh</Button>}
                         <Tbody>
                             {users.map((student) => (
                                 <Tr onClick={() => {
@@ -45,6 +46,8 @@ const AdminUsers = () => {
                                     <Td>{student.nom || ""} {student.prenom || ""}</Td>
                                     <Td>{student.email}</Td>
                                     <Td>{student.phone}</Td>
+                                    <Td > <AdminUserUpdateModal user={student} /> </Td>
+
                                 </Tr>
                             ))}
                         </Tbody>

@@ -1,7 +1,8 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import { UseQueryOptions, useQuery } from "@tanstack/react-query";
+import { UseMutationOptions, UseQueryOptions, useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "../../Auth/service";
-import Axios from "axios";
+import Axios, { AxiosError } from "axios";
+import axios from "axios";
 
 export const userKeys = createQueryKeys('users', {
   list: (role: string) => [role || "all"],
@@ -24,4 +25,7 @@ export const useListUsers = (role?: string, queryOptions: ListUsersQueryOptions 
   });
 
   return { ...query, users: query.data || [] };
+};
+export const useCreateUser = (config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
+  return useMutation(async (payload) => await axios.post("/users", payload), config);
 };

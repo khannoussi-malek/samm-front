@@ -10,7 +10,7 @@ export const accountKeys = createQueryKeys('accountService', {
   account: ["account"],
 });
 
-type role = 'teacher' | 'Student'|'Admin'
+export type role = 'teacher' | 'Student'|'Admin'
 export type User = {
   id: number;
   nom: string;
