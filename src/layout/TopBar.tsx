@@ -3,10 +3,13 @@ import {
   Box,
   Center,
   Flex,
+  HStack,
   IconButton,
   IconButtonProps,
   Image,
   SlideFade,
+  Stack,
+  Text,
   useBreakpointValue
 } from '@chakra-ui/react';
 import { LuMenu } from 'react-icons/lu';
@@ -15,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { useLayoutContext } from '../components/Viewport/LayoutContext';
 import { MainMenu } from './MainMenu';
 import { NavDrawer } from './NavDrawer';
+import { AccountMenu } from './AccountMenu';
 
 const MenuButton = (props: Partial<IconButtonProps>) => {
   const { navOnOpen,navOnClose, navIsOpen} = useLayoutContext();
@@ -60,22 +64,26 @@ export const TopBar = () => {
           align="center"
           pt="safe-top"
           px="4"
+          py="8"
           h="full"
-           bg="gray.800"
+           bg="blue.50"
           border="2px solid"
           w="20rem"
           _dark={{ bg: 'gray.900' }}
           direction="column"
           alignItems="stretch"
+          justifyContent="space-between"
         >
-        <Center as={Link}
-          to="/" >
+      <Stack spacing={4}>  <HStack as={Link}
+          to="/" 
+          gap='4' 
+          alignItems="center">
         
-          <Image src="./images/logo.svg" mt="4" h="4rem" />
-          </Center>
+          <Image src="./images/logo.svg" mt="4" h="4rem" /> <Text mt="4"color="blue.800" fontWeight="bold" fontSize="4xl">SAMM</Text>
+          </HStack>
           <Box me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
-           <MainMenu me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
-          {/* <AccountMenu /> */}
+           <MainMenu me="auto" ms="4" display={{ base: 'none', md: 'flex' }} /></Stack>
+          <AccountMenu /> 
         </Flex>
       </SlideFade>
       <Box w={!navIsOpen?"20rem":"0rem"} />
