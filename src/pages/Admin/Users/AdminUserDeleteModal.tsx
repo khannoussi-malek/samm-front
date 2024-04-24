@@ -11,12 +11,11 @@ type AdminUserDeleteModalProps = {
 export const AdminUserDeleteModal: FC<AdminUserDeleteModalProps> = ({ user }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const deleteUserMutation = useDeleteUser();
-
-    const handleDeleteUser = () => {
-        deleteUserMutation.mutate(user.id);
-        onClose(); // Close the modal after deletion
-    };
+    const {mutate: deleteUser} = useDeleteUser( {
+        onSuccess: ()=>{
+            onClose();
+        }
+    });
 
     return (
         <>
@@ -33,7 +32,7 @@ export const AdminUserDeleteModal: FC<AdminUserDeleteModalProps> = ({ user }) =>
                         ya wldy metyaked theb tfasa5 {user.nom} {user.prenom} ?
                     </ModalBody>
                     <ModalFooter >
-                        <Button colorScheme='blue' mr={3} onClick={useDeleteUser(user.id)} >
+                        <Button colorScheme='blue' mr={3} onClick={()=>deleteUser({id:user.id})} >
                             Confirm
                         </Button>
                         <Button variant='ghost' onClick={onClose} > close </Button>

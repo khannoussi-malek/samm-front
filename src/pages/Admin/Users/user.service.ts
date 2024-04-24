@@ -1,8 +1,7 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import { UseMutationOptions, UseQueryOptions, useMutation, useQuery } from "@tanstack/react-query";
+import { UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { User } from "../../Auth/service";
 import Axios, { AxiosError } from "axios";
-import axios from "axios";
 
 export const userKeys = createQueryKeys('users', {
   list: (role: string) => [role || "all"],
@@ -27,10 +26,17 @@ export const useListUsers = (role?: string, queryOptions: ListUsersQueryOptions 
   return { ...query, users: query.data || [] };
 };
 export const useCreateUser = (config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
-  return useMutation(async (payload) => await axios.post("/users", payload), config);
+  return useMutation(async (payload) => await Axios.post("/users", payload), config);
 };
 
 
-export const useDeleteUser = (id: number, config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
-  return useMutation(async () => await axios.delete(`/users/${id}`), config)
+export const useDeleteUser = ( config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(async ({id}:{id:number}) => await Axios.delete(`/users/${id}`), {...config,
+    onSuccess: (...args) => {
+      queryClient.invalidateQueries();
+      config?.onSuccess?.(...args);
+    },
+  })
 };
