@@ -13,7 +13,6 @@ export const Provider: FC<React.PropsWithChildren<unknown>> = ({ children }) => 
         <ChakraProvider>
           <ReactQueryDevtools initialIsOpen />
           {children}
-
         </ChakraProvider>
       </AuthProvider>;
     </QueryClientProvider>

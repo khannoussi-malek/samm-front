@@ -5,6 +5,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { ErrorPage } from './components/ErrorPage';
 import { Layout } from './layout/Layout';
 import { GuardAdmin } from './pages/Auth/GuardAdmin';
+import Time from './pages/TimeTable/Time.tsx';
 import { GuardAuthenticated } from './pages/Auth/GuardAuthenticated';
 import { Loader } from './pages/Auth/Loader';
 import PageLogout from './pages/Auth/PageLogout';
@@ -80,7 +81,9 @@ const Root = () => {
                   </GuardAuthenticated>
                 }
               />
-              
+              <Route path='/timetable'
+              element={<Time />}
+              />
               <Route path="*" element={<ErrorPage errorCode={404} />} />
             </Routes>
           </Suspense>
