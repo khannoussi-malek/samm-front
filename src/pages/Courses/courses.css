@@ -1,0 +1,10 @@
+.title{
+    color: white;
+    font-size: 40px;
+    justify-content: left;
+}
+
+.card{
+    width: 25% ;
+    aspect-ratio: 1.5
+}

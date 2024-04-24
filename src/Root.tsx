@@ -11,6 +11,7 @@ import PageLogout from './pages/Auth/PageLogout';
 import { SignUpStudent } from './pages/Auth/SignUpStudent';
 import { SignUpTeacher } from './pages/Auth/SignUpTeacher';
 import { GuardPublicOnly } from './pages/Auth/GuardPublicOnly';
+import { Courses } from './pages/Courses/Courses';
 
 const News = lazy(() => import('./pages/News/News'));
 const AdminRouter = lazy(() => import('./pages/Admin/AdminRouter'));
@@ -78,6 +79,12 @@ const Root = () => {
                   <GuardAuthenticated>
                     <News />
                   </GuardAuthenticated>
+                }
+              />
+                <Route
+                path="courses"
+                element={
+                  <Courses />
                 }
               />
               
