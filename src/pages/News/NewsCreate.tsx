@@ -4,11 +4,13 @@ import { Formiz, useForm } from "@formiz/core"
 import { NewsForm } from "./NewsForm"
 import { useCreateNews } from "./new.service"
 import { useToastError, useToastSuccess } from "../../components/Toast"
+import { useNavigate } from "react-router-dom"
 
 const NewsCreate = () => {
     const toastError = useToastError();
     const toastSuccess = useToastSuccess();
-
+  const navigate = useNavigate();
+  
     const {mutate: createNews}= useCreateNews({
     
         onError: (error) => {
@@ -21,12 +23,13 @@ const NewsCreate = () => {
             toastSuccess({
                 title:"News created",
             })        
+            navigate('/news')
         }
     })
     const form = useForm({
         onValidSubmit: (values) => {
             console.log(values)
-            createNews(values)
+            createNews({...values, visibility: !!values?.visibility})
         }
     })
     return (

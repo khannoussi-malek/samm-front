@@ -11,6 +11,7 @@ const AdminNewsUsersRoutes = lazy(() => import('./../News/AdminNewsUsersRoutes')
           <Route path="/" element={<Navigate to="users" replace />} />
         <Route path="users/*" element={<AdminUsersRoutes />} />
         <Route path="news/*" element={<AdminNewsUsersRoutes />} />
+        
         <Route path="*" element={<ErrorPage errorCode={404} />} /> 
       </Routes>
     );

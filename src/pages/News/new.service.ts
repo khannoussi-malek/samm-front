@@ -1,5 +1,5 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import { Mutation, UseMutationOptions, UseQueryOptions, useMutation, useQuery } from "@tanstack/react-query";
+import { Mutation, UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Axios, { AxiosError }  from "axios";
 
 
@@ -40,7 +40,8 @@ type NewsMutationOptions = UseMutationOptions<any, AxiosError,CreatNewsType>;
  };
 
  export const useCreateNews = (mutationOptions: NewsMutationOptions= {}) => {
-  return useMutation(
+  const queryClient = useQueryClient();
+return useMutation(
     async ({
       title,
       content,
@@ -50,6 +51,10 @@ type NewsMutationOptions = UseMutationOptions<any, AxiosError,CreatNewsType>;
     },
     {
       ...mutationOptions,
+      onSuccess: (data, variables, context) => {
+        queryClient.invalidateQueries(newsKeys.list.queryKey);
+        mutationOptions?.onSuccess?.(data, variables, context);
+      }
     }
   )
 
@@ -64,5 +69,5 @@ export const useNews =  (id:number,queryOptions: GetNewsQueryOptions = {}) => {
     },
     ...queryOptions,
   });
-  return { ...query, news:query.data||[] };
+  return { ...query, news:query.data };
 };
