@@ -1,4 +1,4 @@
-import { Button, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
+import { Button, IconButton, IconButtonProps, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react"
 import { FaPen } from "react-icons/fa"
 import { UserForm } from "./UserForm"
 import { Formiz, useForm } from "@formiz/core"
@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom"
 import { useCreateUser } from "./user.service"
 import { FC } from "react"
 
-type AdminUserUpdateModalProps = {
+type AdminUserUpdateModalProps = IconButtonProps &{
     user: User
 }
 
-export const AdminUserUpdateModal: FC<AdminUserUpdateModalProps> = ({ user }) => {
+export const AdminUserUpdateModal: FC<AdminUserUpdateModalProps> = ({ user , ...rest}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const toastSuccess = useToast();
@@ -57,7 +57,7 @@ export const AdminUserUpdateModal: FC<AdminUserUpdateModalProps> = ({ user }) =>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                        <Button colorScheme='blue' mr={3} type="submit">
                             Submit
                         </Button>
                         <Button variant='ghost'>Close</Button>

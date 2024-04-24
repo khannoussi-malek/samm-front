@@ -1,8 +1,7 @@
-import { HStack, Select, Stack } from "@chakra-ui/react";
+import { HStack, Stack } from "@chakra-ui/react";
 import { isEmail, isNumber } from "@formiz/validations";
 import { FieldInput } from "../../../components/FieldInput";
 import { PhoneInput } from "../../../components/PhoneInput";
-import { useState } from "react";
 import { FieldSelect } from "../../../components/FieldSelect";
 
 export const UserForm = () => {

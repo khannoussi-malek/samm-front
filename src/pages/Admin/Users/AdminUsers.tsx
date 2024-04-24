@@ -4,6 +4,7 @@ import { Page, PageContent } from "../../../components/Page";
 import { useState } from "react";
 import { User } from "../../Auth/service";
 import { AdminUserUpdateModal } from "./AdminUserUpdateModal";
+import { AdminUserDeleteModal } from "./AdminUserDeleteModal";
 
 const AdminUsers = () => {
     const [role, setRole] = useState("");
@@ -46,7 +47,8 @@ const AdminUsers = () => {
                                     <Td>{student.nom || ""} {student.prenom || ""}</Td>
                                     <Td>{student.email}</Td>
                                     <Td>{student.phone}</Td>
-                                    <Td > <AdminUserUpdateModal user={student} /> </Td>
+                                    <Td > <AdminUserUpdateModal aria-label="UpdateIcon" user={student} /> <AdminUserDeleteModal user={student} /> </Td>
+
 
                                 </Tr>
                             ))}

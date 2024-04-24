@@ -29,3 +29,8 @@ export const useListUsers = (role?: string, queryOptions: ListUsersQueryOptions 
 export const useCreateUser = (config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
   return useMutation(async (payload) => await axios.post("/users", payload), config);
 };
+
+
+export const useDeleteUser = (id: number, config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
+  return useMutation(async () => await axios.delete(`/users/${id}`), config)
+};
