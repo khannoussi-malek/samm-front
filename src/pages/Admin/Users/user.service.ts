@@ -25,18 +25,36 @@ export const useListUsers = (role?: string, queryOptions: ListUsersQueryOptions 
 
   return { ...query, users: query.data || [] };
 };
-export const useCreateUser = (config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
+export const useCreateUser = (config: UseMutationOptions<User, AxiosError<any>, User> = {}) => {
   return useMutation(async (payload) => await Axios.post("/users", payload), config);
 };
 
 
-export const useDeleteUser = ( config: UseMutationOptions<void, AxiosError<any>, Partial<User>> = {}) => {
+export const useUserUpdate = (
+  config: UseMutationOptions<User, AxiosError, User> = {}
+) => {
   const queryClient = useQueryClient();
-
-  return useMutation(async ({id}:{id:number}) => await Axios.delete(`/users/${id}`), {...config,
-    onSuccess: (...args) => {
+  return useMutation((payload) => Axios.patch("/users/"+payload.id, payload), {
+    ...config,
+    onSuccess: (data, payload, ...rest) => {
       queryClient.invalidateQueries();
-      config?.onSuccess?.(...args);
+      if (config.onSuccess) {
+        config.onSuccess(data, payload, ...rest);
+      }
+    },
+  });
+};
+
+export const useDeleteUser = ( config: UseMutationOptions<void, AxiosError, number> = {}) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (id) => await Axios.delete(`/users/${id}`), 
+    {...config,
+    onSuccess: (data, payload, ...rest) => {
+      queryClient.invalidateQueries();
+      if (config.onSuccess) {
+        config.onSuccess(data, payload, ...rest);
+      }
     },
   })
 };

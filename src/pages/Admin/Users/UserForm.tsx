@@ -1,5 +1,5 @@
 import { HStack, Stack } from "@chakra-ui/react";
-import { isEmail, isNumber } from "@formiz/validations";
+import { isEmail, isLength, isNumber } from "@formiz/validations";
 import { FieldInput } from "../../../components/FieldInput";
 import { PhoneInput } from "../../../components/PhoneInput";
 import { FieldSelect } from "../../../components/FieldSelect";
@@ -48,24 +48,21 @@ export const UserForm = () => {
                     {
                         handler: isNumber(),
                         message: "phone number contain numbers only"
+                    },
+                    {
+                        handler: isLength(8),
+                        message: "Phone number contain 8 numbers"
                     }
                 ]}
             />
         </HStack>
         <HStack>
         <FieldInput
-            name="Inscri"
-            label="Num Inscription"
-            placeholder="place your inscription number"
-            type="number"
-        />
-        <FieldInput
-            name="Password"
+            name="password"
             label="New Password"
             placeholder="place your Password"
             type="password"
         />
-        </HStack>
 
 
         <FieldSelect name="role" label="Role" options={[
@@ -76,6 +73,8 @@ export const UserForm = () => {
             placeholder="Select a role"
             required="Role is required"
         />
+        </HStack>
+
         <HStack>
         <FieldInput
             name="CIN"
@@ -84,7 +83,7 @@ export const UserForm = () => {
             type="number"
         />
         <FieldInput
-            name="passeport"
+            name="passport"
             label="Num Passeport"
             placeholder="place your Passeport number"
             type="number"

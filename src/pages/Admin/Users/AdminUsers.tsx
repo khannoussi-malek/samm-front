@@ -1,10 +1,10 @@
-import { Button, Center, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Spinner, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
-import { useListUsers } from "./user.service";
-import { Page, PageContent } from "../../../components/Page";
+import { Button, Center, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Spinner, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
+import { Page, PageContent } from "../../../components/Page";
 import { User } from "../../Auth/service";
-import { AdminUserUpdateModal } from "./AdminUserUpdateModal";
 import { AdminUserDeleteModal } from "./AdminUserDeleteModal";
+import { AdminUserUpdateModal } from "./AdminUserUpdateModal";
+import { useListUsers } from "./user.service";
 
 const AdminUsers = () => {
     const [role, setRole] = useState("");
@@ -17,11 +17,14 @@ const AdminUsers = () => {
         <Page containerSize="xl" >
             <PageContent  >
                 <Heading>Users</Heading>
+                <Stack direction="row" justifyContent="space-between">
                 <Select onChange={(e) => { setRole(e.target.value) }} maxW="15rem" placeholder='Select option'>
                     <option value='Student'>Students</option>
                     <option value='teacher'>Teachers</option>
                     <option value='Admin'>Admins</option>
                 </Select>
+                <AdminUserUpdateModal isForCreate/>
+                </Stack>
                 {isLoading &&
                     <Center w="full">
                         <Spinner />
@@ -31,25 +34,26 @@ const AdminUsers = () => {
                         <TableCaption>users' List</TableCaption>
                         <Thead>
                             <Tr>
-                                <Th>name </Th>
+                                <Th>name</Th>
                                 <Th>email</Th>
                                 <Th>phone</Th>
                                 <Th></Th>
                             </Tr>
                         </Thead>
-                        {!!isError && <Button onClick={() => { refetch() }}>Refresh</Button>}
+                        {!!isError && <Button onClick={()=>{refetch()}}>Refresh</Button>}
                         <Tbody>
                             {users.map((student) => (
                                 <Tr onClick={() => {
                                     setOneUserInformation(student)
                                     onOpen();
+                                }}
+                                 _hover={{
+                                    bg:"blue.50"
                                 }}>
-                                    <Td>{student.nom || ""} {student.prenom || ""}</Td>
+                                    <Td >{student.nom || ""} {student.prenom || ""}</Td>
                                     <Td>{student.email}</Td>
                                     <Td>{student.phone}</Td>
-                                    <Td > <AdminUserUpdateModal aria-label="UpdateIcon" user={student} /> <AdminUserDeleteModal user={student} /> </Td>
-
-
+                                    <Td display="flex" justifyContent="flex-end" gap="2" > <AdminUserUpdateModal aria-label="UpdateIcon" user={student} /> <AdminUserDeleteModal user={student} /> </Td>
                                 </Tr>
                             ))}
                         </Tbody>
