@@ -1,4 +1,4 @@
-import { Button, Center, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Spinner, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
+import { Badge, Button, Center, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Spinner, Stack, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { Page, PageContent } from "../../../components/Page";
 import { User } from "../../Auth/service";
@@ -12,6 +12,11 @@ const AdminUsers = () => {
     console.log({ users })
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [oneUserInformation, setOneUserInformation] = useState({} as User)
+    const badgeColor = {
+        Admin: "success",
+        teacher: "gray",
+        Student: "purple"
+    }
 
     return (
         <Page containerSize="xl" >
@@ -29,7 +34,7 @@ const AdminUsers = () => {
                     <Center w="full">
                         <Spinner />
                     </Center>}
-                {isSuccess && <TableContainer   >
+                {isSuccess && <TableContainer>
                     <Table w="full" variant='simple' color="#04326b" bg={"#fff"} borderRadius={8}>
                         <TableCaption>users' List</TableCaption>
                         <Thead>
@@ -37,6 +42,7 @@ const AdminUsers = () => {
                                 <Th>name</Th>
                                 <Th>email</Th>
                                 <Th>phone</Th>
+                                <Th>Role</Th>
                                 <Th></Th>
                             </Tr>
                         </Thead>
@@ -53,6 +59,7 @@ const AdminUsers = () => {
                                     <Td >{student.nom || ""} {student.prenom || ""}</Td>
                                     <Td>{student.email}</Td>
                                     <Td>{student.phone}</Td>
+                                    <Td><Badge colorScheme={badgeColor[student.role]||"blue"}>{student.role}</Badge></Td>
                                     <Td display="flex" justifyContent="flex-end" gap="2" > <AdminUserUpdateModal aria-label="UpdateIcon" user={student} /> <AdminUserDeleteModal user={student} /> </Td>
                                 </Tr>
                             ))}
