@@ -48,6 +48,7 @@ const MainMenuItem = ({ to,icon,children, ...rest }: BoxProps & { to: string,ico
       py="2"
       _active={{ bg: 'gray.300' }}
       _hover={{
+        shadow: "sm",
         bg: isActive ? 'blue.700' : 'gray.90',
         _after: {
           opacity: 1,
