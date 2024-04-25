@@ -7,7 +7,7 @@ import {
   forwardRef,
 } from '@chakra-ui/react';
 
-type ResponsiveIconButtonProps = ButtonProps & {
+export type ResponsiveIconButtonProps = ButtonProps & {
   hideTextBreakpoints?: Omit<ResponsiveValue<boolean>, 'boolean'>;
   icon: React.ReactElement;
   children: string;
