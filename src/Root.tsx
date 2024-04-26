@@ -10,6 +10,7 @@ import { Loader } from './pages/Auth/Loader';
 import PageLogout from './pages/Auth/PageLogout';
 import { SignUpStudent } from './pages/Auth/SignUpStudent';
 import { SignUpTeacher } from './pages/Auth/SignUpTeacher';
+import { Courses } from './pages/Courses/Courses';
 
 const NewsDetails = lazy(() => import('./pages/News/NewsDetails'));
 const News = lazy(() => import('./pages/News/News'));
@@ -23,7 +24,7 @@ const Root = () => {
         <Layout>
           <Suspense fallback={<Loader />}>
             <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/" element={<Navigate to="/news" replace />} />
               <Route
                 path="login"
                 element={
@@ -57,14 +58,6 @@ const Root = () => {
                 }
               />
               <Route
-                path="home"
-                element={
-                  <GuardAuthenticated>
-                    <PageHome />
-                  </GuardAuthenticated>
-                }
-              />
-              <Route
                 path="admin/*"
                 element={
                   <GuardAdmin>
@@ -81,6 +74,12 @@ const Root = () => {
                 }
               />
                 <Route
+                path="courses"
+                element={
+                  <Courses />
+                }
+              />
+                <Route
                 path="News/:id"
                 element={
                   <GuardAuthenticated>
@@ -88,8 +87,6 @@ const Root = () => {
                   </GuardAuthenticated>
                 }
               />
-              
-              
               <Route path="*" element={<ErrorPage errorCode={404} />} />
             </Routes>
           </Suspense>
