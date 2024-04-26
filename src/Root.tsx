@@ -24,7 +24,7 @@ const Root = () => {
         <Layout>
           <Suspense fallback={<Loader />}>
             <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/" element={<Navigate to="/news" replace />} />
               <Route
                 path="login"
                 element={
@@ -55,14 +55,6 @@ const Root = () => {
                   <ErrorBoundary>
                     <PageLogout />
                   </ErrorBoundary>
-                }
-              />
-              <Route
-                path="home"
-                element={
-                  <GuardAuthenticated>
-                    <PageHome />
-                  </GuardAuthenticated>
                 }
               />
               <Route
