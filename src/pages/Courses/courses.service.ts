@@ -10,8 +10,8 @@ const factoryKeyStudent = {
 
 
 export const useGetCourses = (config: UseQueryOptions<
-    CourseType[], // the result of api
-    AxiosError // the error type
+    {data:CourseType[]}, 
+    AxiosError 
 > = {}) => {
     const result = useQuery(
         factoryKeyStudent.studentList(),
@@ -20,7 +20,7 @@ export const useGetCourses = (config: UseQueryOptions<
 
 
     return {
-        courses: result?.data || [],
+        courses: result?.data?.data || [],
         ...result,
     };
 };

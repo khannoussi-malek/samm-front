@@ -1,10 +1,10 @@
-import { TeacherType } from "../TeacherList/teacher.type";
+import { User } from "../Auth/service";
 
 export type CourseType = {
     id: number;
     name: string
     coef: number;
     type: string;
-    teacher: TeacherType;
+    teacher: User;
     chapters: string
 }
