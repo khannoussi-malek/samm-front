@@ -9,7 +9,6 @@ import {
   MenuItem,
   MenuList,
   Spinner,
-  Stack,
   Text,
   useColorMode
 } from '@chakra-ui/react';

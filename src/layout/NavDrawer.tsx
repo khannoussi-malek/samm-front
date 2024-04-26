@@ -5,13 +5,19 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Image,
+  HStack,
+  Stack,
+  Text,
 } from '@chakra-ui/react';
 import { useRtl } from './hooks/useRtl';
 import { useLayoutContext } from '../components/Viewport/LayoutContext';
 import { MainMenu } from './MainMenu';
+import { Link } from 'react-router-dom';
+import { Logo } from '../components/Logo';
+import { AccountMenu } from './AccountMenu';
 
 
 export const NavDrawer = ({ ...rest }) => {
@@ -26,18 +32,28 @@ export const NavDrawer = ({ ...rest }) => {
     >
       <DrawerOverlay>
         <DrawerContent
-          bg="gray.800"
+          bg="gray.50"
           color="white"
           pt="safe-top"
           pb="safe-bottom"
         >
           <DrawerCloseButton mt="safe-top" />
           <DrawerHeader justifyContent="center">
-          <Image src="./images/logo.svg" h={{ base: '20', md: '40' }} mx="auto" />
+          <HStack as={Link}
+          to="/" 
+          gap='4' 
+          alignItems="center">
+        <Logo />
+          <Text mt="4"color="blue.800" fontWeight="bold" fontSize="4xl">SAMM</Text>
+          </HStack>
           </DrawerHeader>
           <DrawerBody p="2">
             <MainMenu direction="column" justifyContetn="center" />
           </DrawerBody>
+          <DrawerFooter justifyContent="flex-start">
+          <AccountMenu /> 
+
+          </DrawerFooter>
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>

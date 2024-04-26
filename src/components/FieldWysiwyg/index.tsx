@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { Spinner } from '@chakra-ui/react';
-import { FieldProps, useField } from '@formiz/core';
+import { useField } from '@formiz/core';
+import { FieldInputProps } from '../FieldInput';
 import { FormGroup } from '../FormGroup';
 import { Wysiwyg } from '../Wysiwyg';
 
 
-export const FieldWysiwyg = (props: FieldProps) => {
+export const FieldWysiwyg =<FormattedValue = string> (props: FieldInputProps<FormattedValue>) => {
   const {
     errorMessage,
     id,
@@ -37,6 +38,7 @@ export const FieldWysiwyg = (props: FieldProps) => {
     showError,
     ...rest,
   };
+
   return (
     <FormGroup {...formGroupProps}>
       <Wysiwyg value={value} onChange={setValue} />

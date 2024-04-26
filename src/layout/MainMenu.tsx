@@ -10,7 +10,7 @@ import { useAccount } from '../pages/Auth/service';
 export const MainMenu = ({ ...rest }) => {
   const {isAdmin} = useAccount();
   return (
-    <Stack direction="column" spacing="4" w="90%" {...rest}>
+    <Stack direction="column" spacing="2" w="90%" {...rest}>
       {!!isAdmin&&<MainMenuItem to="/admin/users">Users</MainMenuItem>}
       <MainMenuItem to="/news">News</MainMenuItem>
       <MainMenuItem to="/catchup">Catch-up</MainMenuItem>
@@ -41,12 +41,14 @@ const MainMenuItem = ({ to,icon,children, ...rest }: BoxProps & { to: string,ico
       opacity={isActive ? 1 : 0.8}
       fontWeight="bold"
       borderRadius="xl"
+      shadow={isActive?"xl":"none"}
       fontSize={{ base: 'lg', md: 'xl' }}
-      color={isActive ? 'gray.50' : 'gray.800'}
+      color={isActive ? 'gray.50' : 'gray.600'}
       px="4"
       py="2"
-      _active={{ bg: 'gray.700' }}
+      _active={{ bg: 'gray.300' }}
       _hover={{
+        shadow: "sm",
         bg: isActive ? 'blue.700' : 'gray.90',
         _after: {
           opacity: 1,

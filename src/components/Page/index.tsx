@@ -6,8 +6,7 @@ import {
   FlexProps,
   HStack,
   IconButton,
-  Stack,
-  useTheme,
+  Stack
 } from '@chakra-ui/react';
 import { LuArrowLeft } from 'react-icons/lu';
 import useMeasure from 'react-use-measure';
@@ -73,7 +72,6 @@ export const PageTopBar = ({
   ...rest
 }: PageTopBarProps) => {
   const { isFocusMode } = useLayoutContext();
-  const theme = useTheme();
   const [ref, { height }] = useMeasure();
 
 
