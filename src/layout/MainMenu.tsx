@@ -12,6 +12,7 @@ export const MainMenu = ({ ...rest }) => {
   return (
     <Stack direction="column" spacing="2" w="90%" {...rest}>
       {!!isAdmin&&<MainMenuItem to="/admin/users">Users</MainMenuItem>}
+      {!!isAdmin&&<MainMenuItem to="/admin/departments">Departments</MainMenuItem>}
       <MainMenuItem to="/news">News</MainMenuItem>
       <MainMenuItem to="/catchup">Catch-up</MainMenuItem>
       <MainMenuItem to="/courses">Courses</MainMenuItem>

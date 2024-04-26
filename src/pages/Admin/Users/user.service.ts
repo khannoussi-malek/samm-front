@@ -26,7 +26,16 @@ export const useListUsers = (role?: string, queryOptions: ListUsersQueryOptions 
   return { ...query, users: query.data || [] };
 };
 export const useCreateUser = (config: UseMutationOptions<User, AxiosError<any>, User> = {}) => {
-  return useMutation(async (payload) => await Axios.post("/users", payload), config);
+  const queryClient = useQueryClient();
+  return useMutation(async (payload) => await Axios.post("/users", payload), {
+    ...config,
+    onSuccess: (data, payload, ...rest) => {
+      queryClient.invalidateQueries();
+      if (config.onSuccess) {
+        config.onSuccess(data, payload, ...rest);
+      }
+    },
+  });
 };
 
 
