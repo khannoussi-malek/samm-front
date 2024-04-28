@@ -22,7 +22,8 @@ const departmentsList = () => {
                     <Center w="full">
                         <Spinner />
                     </Center>}
-                {isSuccess && <TableContainer>
+                {!!isError && <Button onClick={() => { refetch() }}>Refresh</Button>}
+                {!!departments && isSuccess && <TableContainer>
                     <Table w="full" variant='simple' color="#04326b" bg={"#fff"} borderRadius={8}>
                         <TableCaption>departments' List</TableCaption>
                         <Thead>
@@ -31,12 +32,11 @@ const departmentsList = () => {
                                 <Th>ID</Th>
                                 <Th>Name</Th>
                                 <Th>Creation Date</Th>
-                                <Th>Majors' number</Th>
+                                <Th>Majorss</Th>
                                 <Th>Head of department</Th>
                                 <Th></Th>
                             </Tr>
                         </Thead>
-                        {!!isError && <Button onClick={() => { (refetch as () => void)() }}>Refresh</Button>}
                         <Tbody>
                             {departments.map((department) => (
                                 <Tr onClick={() => {

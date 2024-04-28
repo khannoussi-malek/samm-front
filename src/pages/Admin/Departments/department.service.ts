@@ -2,11 +2,8 @@ import { createQueryKeys } from "@lukemorales/query-key-factory";
 import { UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Axios, { AxiosError } from "axios";
 import { User } from "../../Auth/service";
-export type Major=  {
-    id: number;
-    name: string;
-    plan: string;
-  }
+import { Major } from "../majors/majour.service";
+
 export type Department = {
     id: number;
     name: string;

@@ -33,6 +33,7 @@
     "@tiptap/react": "^2.1.10",
     "@tiptap/starter-kit": "^2.1.10",
     "axios": "^1.6.8",
+    "chakra-react-select": "4.7.6",
     "dayjs": "^1.11.10",
     "framer-motion": "11.0.20",
     "localforage": "1.10.0",
@@ -43,7 +44,7 @@
     "react-icons": "5.0.1",
     "react-query": "^3.39.3",
     "react-router-dom": "6.22.3",
-    "react-select": "5.2.2",
+    "react-select": "5.8.0",
     "react-use-measure": "2.1.1",
     "sort-by": "1.2.0"
   },
