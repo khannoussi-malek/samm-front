@@ -39,7 +39,6 @@ const AdminUsers = () => {
                         <Thead>
                             <Tr>
                                 <Th>name</Th>
-                                <Th>email</Th>
                                 <Th>phone</Th>
                                 <Th>Role</Th>
                                 <Th></Th>
@@ -55,8 +54,10 @@ const AdminUsers = () => {
                                  _hover={{
                                     bg:"blue.50"
                                 }}>
-                                    <Td >{student.nom || ""} {student.prenom || ""}</Td>
-                                    <Td>{student.email}</Td>
+                                    <Td ><Stack>
+                                        <Text fontSize="lg" >{student.nom || ""} {student.prenom || ""}</Text>
+                                        <Text fontWeight="bold">{student.email}</Text>
+                                        </Stack></Td>
                                     <Td>{student.phone}</Td>
                                     <Td><Badge colorScheme={badgeColor[student.role]||"blue"}>{student.role}</Badge></Td>
                                     <Td display="flex" justifyContent="flex-end" gap="2" > <AdminUserUpdateModal aria-label="UpdateIcon" user={student} /> <AdminUserDeleteModal user={student} /> </Td>

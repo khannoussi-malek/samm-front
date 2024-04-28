@@ -13,6 +13,7 @@ export const MainMenu = ({ ...rest }) => {
     <Stack direction="column" spacing="0.5" w="90%" {...rest} overflowY="auto" maxH="65vh">
       {!!isAdmin&&<MainMenuItem to="/admin/users">Users</MainMenuItem>}
       {!!isAdmin&&<MainMenuItem to="/admin/departments">Departments</MainMenuItem>}
+      {!!isAdmin&&<MainMenuItem to="/admin/major">Major</MainMenuItem>}
       <MainMenuItem to="/news">News</MainMenuItem>
       <MainMenuItem to="/catchup">Catch-up</MainMenuItem>
       <MainMenuItem to="/courses">Courses</MainMenuItem>
