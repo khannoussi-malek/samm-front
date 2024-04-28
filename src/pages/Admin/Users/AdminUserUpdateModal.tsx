@@ -53,7 +53,6 @@ export const AdminUserUpdateModal: FC<AdminUserUpdateModalProps> = ({ user ,isFo
         initialValues: !isForCreate?user:{},
         onValidSubmit: (values) => {
             submit({...user,...values});
-            console.log({...user,...values});
         },
     });
 

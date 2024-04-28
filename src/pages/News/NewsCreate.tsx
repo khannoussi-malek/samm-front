@@ -14,21 +14,21 @@ const NewsCreate = () => {
     const {mutate: createNews}= useCreateNews({
     
         onError: (error) => {
+            const errorMessage = (error.response.data as { message: string[] })?.message[0] ?? "";
             toastError({
-                title:"Error creating news",
-                description: error.response.data?.message[0] ??"",
-              });
+                title: "Error creating news",
+                description: errorMessage,
+            });
         },
         onSuccess: () => {
             toastSuccess({
-                title:"News created",
+                title: "News created",
             })        
             navigate('/news')
         }
     })
     const form = useForm({
         onValidSubmit: (values) => {
-            console.log(values)
             createNews({...values, visibility: !!values?.visibility})
         }
     })
