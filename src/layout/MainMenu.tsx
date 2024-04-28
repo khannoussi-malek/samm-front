@@ -10,7 +10,7 @@ import { useAccount } from '../pages/Auth/service';
 export const MainMenu = ({ ...rest }) => {
   const {isAdmin} = useAccount();
   return (
-    <Stack direction="column" spacing="2" w="90%" {...rest}>
+    <Stack direction="column" spacing="0.5" w="90%" {...rest} overflowY="auto" maxH="65vh">
       {!!isAdmin&&<MainMenuItem to="/admin/users">Users</MainMenuItem>}
       {!!isAdmin&&<MainMenuItem to="/admin/departments">Departments</MainMenuItem>}
       <MainMenuItem to="/news">News</MainMenuItem>
@@ -19,9 +19,7 @@ export const MainMenu = ({ ...rest }) => {
       <MainMenuItem to="/timetable">Time table</MainMenuItem>
       <MainMenuItem to="/grades">Grades</MainMenuItem>
       <MainMenuItem to="/chatroom">Chatroom</MainMenuItem>
-      <MainMenuItem to="/administrative">Administrative</MainMenuItem>
       <MainMenuItem to="/feedbak">Feedback</MainMenuItem>
-      <MainMenuItem to="/history">History</MainMenuItem>
       <MainMenuItem to="/portfolio">Portfolio</MainMenuItem>
     </Stack>
   );

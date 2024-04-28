@@ -14,26 +14,24 @@ export const SignUpStudent = () => {
     const { mutate: createStudent } = useRegisterStudent({
         onSuccess: () => {
             toastSuccess({
-                title: "waaaw nigaaaa",
+                title: "User created successfully",
                 status: 'success',
             });
             navigate('/login')
         },
         onError:(error)=>{
             toastSuccess({
-                title: error.response.data.message[0],
+                title: error.response.data.message[0] || "error",
                 status: 'error',
             });
         }
     })
     const form = useForm<RegisterStudentPayload>({
         onValidSubmit: (values) => {
-            console.log(values);
             createStudent(values);
         },
     });
     
-console.log({form})
     const [description, setDescription] = useState('1')
     return (
         <Box h="100vh" display="flex" justifyContent="center" alignItems="center" bg="#017da7">

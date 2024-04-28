@@ -12,7 +12,6 @@ const NewsUpdate = () => {
     const form = useForm({
         initialValues: news,
         onValidSubmit: (values) => {
-            console.log(values)
             // updateNews(+id,{...values, visibility: !!values?.visibility})
         }
     })

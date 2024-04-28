@@ -26,8 +26,6 @@ export const DepartmentUpdateModal: FC<DepartmentUpdateModalProps> = ({ departme
         value: user.id,
     }));
 
-    console.log({ headOfDepartmentOptions })
-
     const { mutate: updateDepartment, isLoading: isUpdatingLoading } = useDepartmentUpdate({
         onSuccess: (data) => {
             toastSuccess({
@@ -62,7 +60,6 @@ export const DepartmentUpdateModal: FC<DepartmentUpdateModalProps> = ({ departme
         initialValues: !isForCreate ? department : {},
         onValidSubmit: (values) => {
             submit({ ...department, ...values });
-            console.log({ ...department, ...values });
         },
     });
 

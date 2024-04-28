@@ -9,13 +9,12 @@ import dayjs from "dayjs";
 
 const departmentsList = () => {
     const { departments, isLoading, isSuccess, isError, refetch } = useListDepartments();
-    console.log({ departments })
     const { onOpen } = useDisclosure()
 
     return (
         <Page containerSize="xl" >
             <PageContent  >
-                <Heading>departments</Heading>
+                <Heading>Departments</Heading>
                 <Stack direction="row" justifyContent="flex-end">
                     <DepartmentUpdateModal isForCreate />
                 </Stack>
@@ -28,7 +27,7 @@ const departmentsList = () => {
                         <TableCaption>departments' List</TableCaption>
                         <Thead>
                             <Tr>
-                                <Th></Th>
+                                <Th ></Th>
                                 <Th>ID</Th>
                                 <Th>Name</Th>
                                 <Th>Creation Date</Th>
@@ -37,7 +36,7 @@ const departmentsList = () => {
                                 <Th></Th>
                             </Tr>
                         </Thead>
-                        {!!isError && <Button onClick={() => { refetch() }}>Refresh</Button>}
+                        {!!isError && <Button onClick={() => { (refetch as () => void)() }}>Refresh</Button>}
                         <Tbody>
                             {departments.map((department) => (
                                 <Tr onClick={() => {
@@ -47,16 +46,17 @@ const departmentsList = () => {
                                         bg: "blue.50"
                                     }}>
                                     <Td >
-                                        <Tooltip label={`the boss`} borderRadius="lg" hasArrow>
+                                        <Tooltip label={`${department.headOfDepartment?.nom ||''} ${department.headOfDepartment?.prenom ||''}`} borderRadius="lg" hasArrow >
                                             <Badge
+                                            
                                                 colorScheme={
-                                                    !department.headOfDepartmentId ? 'blue' : 'warning'
+                                                    !!department.headOfDepartmentId ? 'blue' : 'warning'
                                                 }
                                             >
                                                 <Icon
                                                     fontSize="lg"
                                                     icon={
-                                                        !department.headOfDepartmentId
+                                                        !!department.headOfDepartmentId
                                                             ? FiUserPlus
                                                             : FiUserMinus
                                                     }
@@ -67,9 +67,10 @@ const departmentsList = () => {
                                     </Td>
                                     <Td>{department.id}</Td>
                                     <Td>{department.name}</Td>
-                                    <Td>{dayjs(department.createdAt).format("YYYY-M-DD")}</Td>
-                                    <Td></Td>
-                                    <Td></Td>
+                                    <Td>{dayjs(department.createdAt).format("YYYY-MM-DD HH:mm")}</Td>
+                                    <Td>{department.majors.length??0}</Td>
+                                    <Td>{department.headOfDepartment
+                                    ?.nom ||''} {department.headOfDepartment?.prenom ||''} {!department.headOfDepartment && "not assigned yet"}</Td>
                                     <Td display="flex" justifyContent="flex-end" gap="2" > <DepartmentUpdateModal aria-label="UpdateIcon" department={department} /> <DepartmentDeleteModal department={department} /> </Td>
                                 </Tr>
                             ))}

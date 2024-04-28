@@ -9,7 +9,6 @@ import { useListUsers } from "./user.service";
 const AdminUsers = () => {
     const [role, setRole] = useState("");
     const { users, isLoading, isSuccess, isError, refetch } = useListUsers(role);
-    console.log({ users })
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [oneUserInformation, setOneUserInformation] = useState({} as User)
     const badgeColor = {
