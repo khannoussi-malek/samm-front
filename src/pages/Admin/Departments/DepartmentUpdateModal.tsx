@@ -7,10 +7,19 @@ import { useToastError, useToastSuccess } from "../../../components/Toast"
 import { DepartmentForm } from "./DepartmentForm"
 import { Department, useCreateDepartment, useDepartmentUpdate } from "./department.service"
 import { useListUsers } from "../Users/user.service"
+import { useListMajors } from "../majors/majour.service"
 
 type DepartmentUpdateModalProps = Partial<ResponsiveIconButtonProps> & {
     department?: Department
     isForCreate?: boolean
+}
+
+
+type DepartmentFormType = {
+    name: string;
+    headOfDepartmentId: string;
+    teatching: string[];
+
 }
 
 export const DepartmentUpdateModal: FC<DepartmentUpdateModalProps> = ({ department, isForCreate = false, ...rest }) => {
@@ -20,10 +29,17 @@ export const DepartmentUpdateModal: FC<DepartmentUpdateModalProps> = ({ departme
     const toastError = useToastError();
 
     const { users, isLoading: isListTeacherLoding } = useListUsers("teacher");
-
+const  {
+    majors, isLoading: isListMajorsLoding
+}=useListMajors();
     const headOfDepartmentOptions = users.map((user) => ({
         label: `${user.nom} ${user.prenom}`,
         value: user.id,
+    }));
+
+    const majorsOptions= majors.map((major) => ({
+        label: major.name,
+        value: major.id,
     }));
 
     const { mutate: updateDepartment, isLoading: isUpdatingLoading } = useDepartmentUpdate({
@@ -55,11 +71,21 @@ export const DepartmentUpdateModal: FC<DepartmentUpdateModalProps> = ({ departme
     const isLoading = isUpdatingLoading || isCreateionLoading;
 
     const submit = !isForCreate ? updateDepartment : createDepartment
-
-    const form = useForm<Department>({
-        initialValues: !isForCreate ? department : {},
+    let initialValues = {}
+    if(!isForCreate){
+        initialValues= {...department, teatching:department.teatching.map(v=>v.id),
+            majors: department.majors.map(v=>v.id)
+         }
+    }
+    const form = useForm<any>({
+        initialValues,
         onValidSubmit: (values) => {
-            submit({ ...department, ...values });
+            let filtringValue= { ...department, ...values };
+            filtringValue.teatching = (values.teatching||[]).map(String);
+            filtringValue.headOfDepartmentId = `${values.headOfDepartmentId}`;
+            filtringValue.majors = (values.majors||[]).map(String);
+            const {id,createdAt,updaredAt,headOfDepartment,...finalValues} = filtringValue;
+            submit(filtringValue);
         },
     });
 
@@ -81,9 +107,9 @@ export const DepartmentUpdateModal: FC<DepartmentUpdateModalProps> = ({ departme
                 <ModalContent >
                     <ModalHeader> {isForCreate ? `Create department` : `Update ${department?.name}`} </ModalHeader>
                     <ModalCloseButton />
-                    {!isListTeacherLoding && <Formiz connect={form} autoForm  >
+                    {!isListTeacherLoding && !isListMajorsLoding && <Formiz connect={form} autoForm  >
                         <ModalBody>
-                            <DepartmentForm headOfDepartmentOptions={headOfDepartmentOptions} />
+                            <DepartmentForm headOfDepartmentOptions={headOfDepartmentOptions} majorsOptions={majorsOptions} />
                         </ModalBody>
 
                         <ModalFooter>

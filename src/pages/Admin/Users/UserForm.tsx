@@ -59,7 +59,7 @@ export const UserForm = () => {
         <HStack>
         <FieldInput
             name="password"
-            label="New Password"
+            label="Password"
             placeholder="place your Password"
             type="password"
         />

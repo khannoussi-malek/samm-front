@@ -13,6 +13,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
@@ -39,6 +40,7 @@ const ErrorFallback = ({ error }: FallbackProps) => {
             >
             Expand
             </Button>
+            <Box fontFamily="monospace">{error.message}</Box>
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
               <ModalContent>
