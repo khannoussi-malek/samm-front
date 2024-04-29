@@ -1,11 +1,13 @@
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import Axios, { AxiosError } from "axios";
 import { CourseType } from "./courses.type";
+import axios from "axios";
 
-const factoryKeyStudent = {
+const factoryKeyCourse = {
 
     all: () => ["course"],
-    studentList: () => ["courses", ...factoryKeyStudent.all()]
+    courses: () => ["courses", ...factoryKeyCourse.all()],
+    get: (id: number) => [ { id }],
 }
 
 
@@ -14,7 +16,7 @@ export const useGetCourses = (config: UseQueryOptions<
     AxiosError 
 > = {}) => {
     const result = useQuery(
-        factoryKeyStudent.studentList(),
+        factoryKeyCourse.courses(),
         (): Promise<any> => Axios.get('/subjects'), config
     );
 
@@ -24,3 +26,10 @@ export const useGetCourses = (config: UseQueryOptions<
         ...result,
     };
 };
+
+export const useCourseDetails = async (
+    id: number,
+  ) =>
+    await (
+      await axios.get(`/subjects/${id}`)
+    ).data as CourseType;

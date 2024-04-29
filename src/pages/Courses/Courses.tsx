@@ -1,5 +1,4 @@
 import { Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
-import { CourseCard } from "../../components/CourseCard";
 import { Page, PageContent } from "../../components/Page";
 import { useGetCourses } from "./courses.service";
 import { SubjectCard } from "../../components/SubjectCard";
