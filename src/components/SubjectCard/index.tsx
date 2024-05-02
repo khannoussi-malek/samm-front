@@ -8,7 +8,7 @@ type SubjectCardProps = StackProps & {
     teacherName: string;
     pic: string;
     details?: string;
-    id?: number;
+    id: number;
 }
 export const SubjectCard: FC<SubjectCardProps> = ({ id, subjectName, teacherName, pic, details = "Details", ...rest }) => {
     return (

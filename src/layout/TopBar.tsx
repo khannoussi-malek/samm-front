@@ -66,7 +66,6 @@ export const TopBar = () => {
           py="8"
           h="full"
            bg="blue.50"
-          border="2px solid"
           w="20rem"
           _dark={{ bg: 'gray.900' }}
           direction="column"

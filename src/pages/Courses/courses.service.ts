@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useMutation, UseMutationOptions, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import Axios, { AxiosError } from "axios";
 import { CourseType } from "./courses.type";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
@@ -51,6 +51,18 @@ export const useCourseDetails = async (id: number, queryOptions: GetCourseQueryO
 }
 
 */
+export const useCreateCourse = (config: UseMutationOptions<CourseType, AxiosError<any>, CourseType> = {}) => {
+    const queryClient = useQueryClient();
+    return useMutation(async (payload) => await Axios.post("/subjects", payload), {
+        ...config,
+        onSuccess: (data, payload, ...rest) => {
+            queryClient.invalidateQueries();
+            if (config.onSuccess) {
+                config.onSuccess(data, payload, ...rest);
+            }
+        },
+    });
+};
 
 export const useCourseDetails = (id: number, queryOptions: GetCourseQueryOptions = {}) => {
     const query = useQuery({

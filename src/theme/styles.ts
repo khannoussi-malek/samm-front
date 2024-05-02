@@ -14,10 +14,10 @@ const externalsStyles = (props: StyleFunctionProps) =>
 export const styles: Styles = {
   global: (props) => ({
     html: {
-      bg: 'gray.800',
+      bg: 'gray.50',
     },
     body: {
-      bg: mode('gray.50', 'gray.800')(props),
+      bg: 'rgba(1, 66, 122, 0.1)',
       // Prevent visual jump between pages with and without scroll
       overflowY: 'scroll',
       WebkitTapHighlightColor: 'transparent',
