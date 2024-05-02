@@ -86,7 +86,7 @@ const Root = () => {
                 path="courses/:id"
                 element={
                   <GuardAuthenticated>
-                    <CourseDetails id={"1"} />
+                    <CourseDetails />
                   </GuardAuthenticated>
                 } />
                 <Route

@@ -1,49 +1,32 @@
-import { Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
+import { Center, Heading, Spinner, Stack } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import { ChapterCard } from "../../components/ChapterCard";
 import { Page, PageContent } from "../../components/Page";
 import { useCourseDetails } from "./courses.service";
-import { ChapterCard } from "../../components/ChapterCard";
-import { useEffect, useState } from "react";
-import { CourseType } from "./courses.type";
 
-interface CourseDetailsProps {
-    id: string;
-}
 
-export const CourseDetails = ({id}:CourseDetailsProps) => {
-    const [course, setCourse] = useState<CourseType>()
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+export const CourseDetails = () => {
+    const { id } = useParams();
+    const { course, isLoading } = useCourseDetails(+id);
 
-    useEffect(() => {
-        const fetchCourse = async () => {
-          try {
-            const data  = await useCourseDetails(+id);
-            setCourse(data);
-          } catch (error) {
-            console.error('Error fetching course:', error);
-          }
-        };
-        fetchCourse(); 
-        setIsLoading(false)
-    }, [id]);
-    console.log(course)
 
     return (
         <Page containerSize="xl">
-        <PageContent  >
-            <Heading >
-                {course.name}
-            </Heading>
+            <PageContent  >
+                <Heading >
+                    {course?.name}
+                </Heading>
                 {isLoading && <Center>
                     <Spinner />
-                    </Center>}
-                    
-            <Stack gap="8" spacing={0} flexDirection="row" wrap="wrap" justifyContent="space-around" >
-            {course.chapters.length > 0 && course.chapters.map((chapter) => (
-                <ChapterCard title={chapter.name} order={chapter.order} pages={chapter.pages} />
-            ))}
-            </Stack>
-        </PageContent>
-    </Page>
+                </Center>}
+
+                <Stack gap="8" spacing={0} flexDirection="row" wrap="wrap" justifyContent="space-around" >
+                    {course.chapters.length > 0 && (course.chapters || [])?.map((chapter) => (
+                        <ChapterCard title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} />
+                    ))}
+                </Stack>
+            </PageContent>
+        </Page>
     );
 };
 
