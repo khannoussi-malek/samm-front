@@ -7,24 +7,24 @@ import { useCourseDetails } from "./courses.service";
 
 export const CourseDetails = () => {
     const { id } = useParams();
-    const { course, isLoading } = useCourseDetails(+id);
+    const { course, isLoading, isSuccess } = useCourseDetails(+id);
 
 
     return (
         <Page containerSize="xl">
             <PageContent  >
-                <Heading >
+                {isSuccess && (<Heading >
                     {course?.name}
-                </Heading>
+                </Heading>)}
                 {isLoading && <Center>
                     <Spinner />
                 </Center>}
 
-                <Stack gap="8" spacing={0} flexDirection="row" wrap="wrap" justifyContent="space-around" >
+                {isSuccess && <Stack gap="8" spacing={0} flexDirection="row" wrap="wrap" justifyContent="space-around" >
                     {course.chapters.length > 0 && (course.chapters || [])?.map((chapter) => (
                         <ChapterCard title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} />
                     ))}
-                </Stack>
+                </Stack>}
             </PageContent>
         </Page>
     );
