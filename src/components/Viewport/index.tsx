@@ -38,8 +38,8 @@ export const Viewport = (props: FlexProps) => {
       style={
         !isStandalone
           ? {
-              minHeight: 'calc(var(--vh, 1vh) * 100)',
-            }
+            minHeight: 'calc(var(--vh, 1vh) * 100)',
+          }
           : {}
       }
       {...props}

@@ -1,6 +1,6 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import { Mutation, UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Axios, { AxiosError }  from "axios";
+import { UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Axios, { AxiosError } from "axios";
 
 
 export const newsKeys = createQueryKeys('news', {
