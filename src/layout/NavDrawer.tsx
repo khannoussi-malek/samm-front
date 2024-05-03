@@ -39,19 +39,19 @@ export const NavDrawer = ({ ...rest }) => {
         >
           <DrawerCloseButton mt="safe-top" />
           <DrawerHeader justifyContent="center">
-          <HStack as={Link}
-          to="/" 
-          gap='4' 
-          alignItems="center">
-        <Logo />
-          <Text mt="4"color="blue.800" fontWeight="bold" fontSize="4xl">SAMM</Text>
-          </HStack>
+            <HStack as={Link}
+              to="/"
+              gap='4'
+              alignItems="center">
+              <Logo />
+              <Text mt="4" color="#01427A" fontWeight="bold" fontSize="4xl">SAMM</Text>
+            </HStack>
           </DrawerHeader>
           <DrawerBody p="2">
             <MainMenu direction="column" justifyContetn="center" />
           </DrawerBody>
           <DrawerFooter justifyContent="flex-start">
-          <AccountMenu /> 
+            <AccountMenu />
 
           </DrawerFooter>
         </DrawerContent>
