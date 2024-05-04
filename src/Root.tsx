@@ -17,7 +17,7 @@ const NewsDetails = lazy(() => import('./pages/News/NewsDetails'));
 const News = lazy(() => import('./pages/News/News'));
 const AdminRouter = lazy(() => import('./pages/Admin/AdminRouter'));
 const Login = lazy(() => import('./pages/Auth/Login'));
-const PageHome = lazy(() => import('./pages/Home/PageHome'))
+const TimeTables = lazy(() => import('./pages/TimeTables/TimeTables'));
 const Root = () => {
   return (
     <ErrorBoundary>
@@ -79,6 +79,14 @@ const Root = () => {
                 element={
                   <GuardAuthenticated>
                     <Courses />
+                  </GuardAuthenticated>
+                }
+              />
+              <Route
+                path="timetable"
+                element={
+                  <GuardAuthenticated>
+                    <TimeTables />
                   </GuardAuthenticated>
                 }
               />
