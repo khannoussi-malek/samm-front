@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Text, useBreakpointValue } from "@chakra-ui/react";
 import { Formiz, useForm } from "@formiz/core";
 import { isEmail } from '@formiz/validations';
 import { useState } from "react";
@@ -16,16 +16,16 @@ const Login = () => {
         },
     });
     let navigate = useNavigate();
-
+const isMobile = useBreakpointValue({base:true,md:false})
     return (
         <Box h="100vh" display="flex" justifyContent="center" alignItems="center" bg="#017da7">
             <Flex h="90vh" width="80%" >
-                <Center width="full" bgColor="blue.200" boxShadow="lg">
+                {!isMobile && <Center width="full" bgColor="blue.200" boxShadow="lg">
                     {showSecretImage && <Image src="./sImage/ah-shit-here-we-go-again-ah-shit.gif" borderRadius="lg" />}
                     {!showSecretImage && <Image src="./images/uni.png" alt="university image" />}
-                </Center>
+                </Center>}
                 <Center width="full" bg="gray.50" >
-                    <Stack flexDirection="column" bg="blue.50" borderRadius="xl" shadow="lg" p="8" h="80%" w="50%" justifyContent="space-around" >
+                    <Stack flexDirection="column" bg="blue.50" borderRadius="xl" shadow="lg" p="8" h="80%" w={{base:"full",lg:"70%",xl:"50%"}} justifyContent="space-around" >
                         <Stack>
                             <Stack justifyContent="center" alignItems="center">
                                 <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(1, 1fr)">

@@ -148,7 +148,7 @@ export const SignUpStudent = () => {
                                         <Button type="submit" colorScheme="blue" width="40%">
                                             Sign Up
                                         </Button>
-                                        <Button type="reset" colorScheme="pink" width="40%">
+                                        <Button type="reset" onClick={()=>navigate(-1)} colorScheme="pink" width="40%">
                                             Cancel
                                         </Button>
                                     </HStack>
