@@ -16,7 +16,6 @@ const NewsDetails = lazy(() => import('./pages/News/NewsDetails'));
 const News = lazy(() => import('./pages/News/News'));
 const AdminRouter = lazy(() => import('./pages/Admin/AdminRouter'));
 const Login = lazy(() => import('./pages/Auth/Login'));
-const PageHome = lazy(() => import('./pages/Home/PageHome'))
 const Root = () => {
   return (
     <ErrorBoundary>
