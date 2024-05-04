@@ -25,7 +25,7 @@ import { useListNews } from "./new.service";
             {!news?.length && <Center ><p>No news</p></Center>}
             <Stack spacing={4}>
                 {!!news && news.filter(value=>value.visibility ||isAdmin).map((aNew)=>(
-                    <Stack justifyContent="space-between" direction="row" as={Link} to={`/news/${aNew.id}`} bg="#01427A" borderRadius="xl" color="gray.50" p="4" id={`${aNew.id}`}>
+                    <Stack justifyContent="space-between" alignItems="center" direction="row" as={Link} to={`/news/${aNew.id}`} bg="#01427A" borderRadius="xl" color="gray.50" p="4" id={`${aNew.id}`}>
                         <Heading>{aNew.title}</Heading>
                         {isAdmin&&<Stack direction="row">{!aNew.visibility && <Icon icon={GoEye} fontSize="2xl" />}
                         <ResponsiveIconButton as={Link} to={`/admin/news/update/${aNew.id}`} icon={<BiEdit />} children="Update" /></Stack>}
