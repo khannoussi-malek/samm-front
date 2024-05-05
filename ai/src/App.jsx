@@ -5,7 +5,7 @@ import './App.css'
 function App() {
 
   return (
-    <Container maxW={'none'} className="App" bgColor={'black'} bgGradient={'linear(to-r, gray.800, blue.700)'} color={'black'}>
+    <Container maxW={'none'} className="App" bgColor={'white'} bgGradient={'linear(to-r, #01427A, #01B3EF)'} color={'black'}>
       <ChatWithGemini />
     </Container>
   )

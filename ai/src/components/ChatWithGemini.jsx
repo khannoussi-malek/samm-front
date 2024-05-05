@@ -65,7 +65,7 @@ const ChatWithGemini = () => {
                         variant={'unstyled'}
                     />
                     <Box className="flex gap-2 flex-col">
-                        <Button colorScheme="whatsapp" h="1.75rem" size="sm" onClick={handleSend} rightIcon={<ArrowForwardIcon />}>
+                        <Button colorScheme="pink" h="1.75rem" size="sm" onClick={handleSend} rightIcon={<ArrowForwardIcon />}>
                             Send
                         </Button>
                         <Button color={"white"} _hover={{ bg: "blue.500", }} variant={'outline'} h="1.75rem" size="sm" onClick={() => updateMessage([])} rightIcon={<DeleteIcon />}>
@@ -85,7 +85,7 @@ const Introduction = () => {
         const { value = '', direction = 'r', size = 'large' } = props
         return <Text
             fontSize={size}
-            bgGradient={`linear(to-${direction}, blue.100, cyan.700)`}
+            bgGradient={`linear(to-${direction},blue.50 , blue.200)`}
             bgClip={'text'}
             fontWeight={'bold'}
         >
@@ -97,7 +97,7 @@ const Introduction = () => {
     return <Box className="flex flex-col items-center justify-center">
         <Box className="flex flex-col items-center justify-center">
             <TextRenderer value="Welcome to SAMM AI" size="xxx-large" />
-            <TextRenderer value="I'm Gemini, a chatbot that can help you with your queries" direction={'l'} />
+            <TextRenderer value="I'm SAMM, a chatbot that can help you with your queries" direction={'l'} />
         </Box>
         <Box className="flex flex-col items-center justify-center">
             <TextRenderer value="Type a message to get started" />
@@ -121,7 +121,7 @@ const RenderMessage = ({ message, msgIndex, loading, messageLength }) => {
                 <Box
                     as={motion.div}
                     className={`flex overflow-auto max-w-[95%]  md:max-w-[96%] w-fit items-end my-2 p-1 px-2 rounded-md ${role === 'user' ? 'self-end' : 'self-start'}`}
-                    bgColor={role === 'user' ? 'blue.500' : 'gray.200'}
+                    bgColor={role === 'user' ? 'BLUE.500' : 'gray.200'}
                     textColor={role === 'user' ? 'white' : 'black'}
                     initial={{ opacity: 0, scale: 0.5, y: 20, x: role === 'user' ? 20 : -20 }}
                     animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
