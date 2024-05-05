@@ -1,6 +1,6 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { Formiz, useForm } from "@formiz/core"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { FaPen, FaPlus } from "react-icons/fa"
 import { ResponsiveIconButton, ResponsiveIconButtonProps } from "../../../components/ResponsiveIconButton"
 import { useToastError, useToastSuccess } from "../../../components/Toast"
@@ -14,7 +14,7 @@ type MajorUpdateModalProps = Partial<ResponsiveIconButtonProps> & {
 
 export const MajorUpdateModal: FC<MajorUpdateModalProps> = ({ major, isForCreate = false, ...rest }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const [plan, setPlan] = useState(0);
     const toastSuccess = useToastSuccess();
     const toastError = useToastError();
 
@@ -56,8 +56,9 @@ export const MajorUpdateModal: FC<MajorUpdateModalProps> = ({ major, isForCreate
     const form = useForm<any>({
         initialValues,
         onValidSubmit: (values) => {
-            let filtringValue= { ...major, ...values };
-            const {id,createdAt,updaredAt,...finalValues} = filtringValue;
+            let filtringValue= { ...major, ...values, plan };
+            console.log(filtringValue)
+            // const {id,createdAt,updaredAt,...finalValues} = filtringValue;
             submit(filtringValue);
         },
     });
@@ -82,7 +83,7 @@ export const MajorUpdateModal: FC<MajorUpdateModalProps> = ({ major, isForCreate
                     <ModalCloseButton />
                     <Formiz connect={form} autoForm  >
                         <ModalBody>
-                            <MajorForm  />
+                            <MajorForm setPlan={setPlan} />
                         </ModalBody>
 
                         <ModalFooter>
