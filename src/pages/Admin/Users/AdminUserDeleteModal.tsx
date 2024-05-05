@@ -1,4 +1,4 @@
-import { useDisclosure, Modal, Button, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, IconButton } from "@chakra-ui/react"
+import { useDisclosure, Modal, Button, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, IconButton, Image, Text } from "@chakra-ui/react"
 import { User } from "../../Auth/service";
 import { FC } from "react";
 import { MdDelete } from "react-icons/md";
@@ -11,8 +11,8 @@ type AdminUserDeleteModalProps = {
 export const AdminUserDeleteModal: FC<AdminUserDeleteModalProps> = ({ user }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const {mutate: deleteUser, isLoading} = useDeleteUser( {
-        onSuccess: ()=>{
+    const { mutate: deleteUser, isLoading } = useDeleteUser({
+        onSuccess: () => {
             onClose();
         }
     });
@@ -29,10 +29,11 @@ export const AdminUserDeleteModal: FC<AdminUserDeleteModalProps> = ({ user }) =>
                     <ModalHeader>Delete user </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        ya wldy metyaked theb tfasa5 {user.nom} {user.prenom} ?
+                        <Text >ya wldy metyaked theb tfasa5 {user.nom} {user.prenom} ? </Text>
+                        <Image src="../images/womanMeme.jpg" alt="meme pic" />
                     </ModalBody>
                     <ModalFooter >
-                        <Button colorScheme='blue' isLoading={isLoading} mr={3} onClick={()=>deleteUser(user.id)} >
+                        <Button colorScheme='blue' isLoading={isLoading} mr={3} onClick={() => deleteUser(user.id)} >
                             Confirm
                         </Button>
                         <Button variant='ghost' isLoading={isLoading} onClick={onClose} > close </Button>
