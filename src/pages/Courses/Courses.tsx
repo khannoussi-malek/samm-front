@@ -1,12 +1,10 @@
 import { Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
-import { CourseCard } from "../../components/CourseCard";
 import { Page, PageContent } from "../../components/Page";
-import { useGetCourses } from "./courses.service";
 import { SubjectCard } from "../../components/SubjectCard";
+import { useGetCourses } from "./courses.service";
 
 export const Courses = () => {
     const { courses, isLoading, isError, refetch } = useGetCourses();
-    console.log(courses)
 
     return (
         <Page containerSize="xl">

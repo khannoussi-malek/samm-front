@@ -4,15 +4,23 @@ import { ConfirmDialog } from "../../../components/ConfirmDialog";
 import { FieldInput } from "../../../components/FieldInput";
 import { FieldUploadDocument } from "../../../components/FieldUploadDocument";
 import { UploadMenu } from "../../../components/UploadMenu";
-import { uploadMutation } from "./Major.service";
+import { uploadMutation, useDeleteFile } from "./Major.service";
 
 type MajorFormProps = StackProps & {
   setPlan :(values: number)=>void
+  plan: number
     
 };
-export const MajorForm: FC<MajorFormProps> = ({setPlan,...rest}) => {
+export const MajorForm: FC<MajorFormProps> = ({setPlan,plan,...rest}) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-
+  const {
+    mutate: deleteDocument,
+  }=useDeleteFile({
+    onSuccess: () => {
+    onClose();
+    setPlan(0);
+    }
+  })
 
   const {
     mutate: uploadDocument,
@@ -25,8 +33,10 @@ export const MajorForm: FC<MajorFormProps> = ({setPlan,...rest}) => {
     }
   )
   const handleDeleteDocument = async () => {
-    onClose();
+    deleteDocument(plan)
   };
+
+  
   const handleOnDelete = () => {
     onOpen();
   };

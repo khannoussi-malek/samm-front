@@ -65,3 +65,18 @@ export const uploadMutation = (config: UseMutationOptions<{file:File},AxiosError
       }), config);
 }
 
+
+export const useDeleteFile = (config: UseMutationOptions<Major,AxiosError,Major>={}) => {
+
+    const queryClient = useQueryClient();
+    return useMutation((id) => Axios.delete("/majors/" + id), {
+        ...config,
+        onSuccess: (data, id, ...rest) => {
+            queryClient.invalidateQueries();
+            if (config.onSuccess) {
+                config.onSuccess(data, id, ...rest);
+            }
+        }
+    });
+}
+
