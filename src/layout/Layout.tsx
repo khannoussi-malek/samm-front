@@ -7,6 +7,7 @@ import { LayoutContext } from '../components/Viewport/LayoutContext';
 import { TopBar } from './TopBar';
 import { useAuthContext } from '../pages/Auth/AuthContext';
 import { LoginModalInterceptor } from '../pages/Auth/LoginModalInterceptor';
+import { ChatBot } from '../components/chatbot';
 
 export const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const [isFocusMode, setIsFocusMode] = useState(false);
@@ -32,7 +33,7 @@ export const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
           {children}
         </Flex>
         <LoginModalInterceptor />
-
+        <ChatBot w={{base:"full", md:"45vw",lg:"30vw"}} h="50vh" position="fixed" bottom="0" right="0" />
       </Viewport>
     </LayoutContext.Provider>
   );
