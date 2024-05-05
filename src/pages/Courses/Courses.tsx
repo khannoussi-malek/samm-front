@@ -2,10 +2,10 @@ import { Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
 import { Select } from "chakra-react-select";
 import { Page, PageContent } from "../../components/Page";
 import { SubjectCard } from "../../components/SubjectCard";
+import { useAccount } from "../Auth/service";
 import { groupsOptions } from "./CourseForm";
 import { CourseUpdateModal } from "./CourseUpdateModal";
 import { useGetCourses } from "./courses.service";
-import { useAccount } from "../Auth/service";
 
 export const Courses = () => {
     const { courses, isLoading, isError, refetch } = useGetCourses();

@@ -57,7 +57,6 @@ export const MajorUpdateModal: FC<MajorUpdateModalProps> = ({ major, isForCreate
         initialValues,
         onValidSubmit: (values) => {
             let filtringValue= { ...major, ...values, plan };
-            console.log(filtringValue)
             // const {id,createdAt,updaredAt,...finalValues} = filtringValue;
             submit(filtringValue);
         },
@@ -83,7 +82,7 @@ export const MajorUpdateModal: FC<MajorUpdateModalProps> = ({ major, isForCreate
                     <ModalCloseButton />
                     <Formiz connect={form} autoForm  >
                         <ModalBody>
-                            <MajorForm setPlan={setPlan} />
+                            <MajorForm setPlan={setPlan} plan={plan} />
                         </ModalBody>
 
                         <ModalFooter>
