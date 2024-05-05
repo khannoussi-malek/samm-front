@@ -13,7 +13,7 @@ export const Provider: FC<React.PropsWithChildren<unknown>> = ({ children }) => 
       <AuthProvider>
         <ChakraProvider
         theme={theme}>
-          <ReactQueryDevtools initialIsOpen />
+          {/* <ReactQueryDevtools initialIsOpen /> */}
           {children}
 
         </ChakraProvider>
