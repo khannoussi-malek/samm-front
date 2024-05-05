@@ -17,7 +17,8 @@ const NewsDetails = lazy(() => import('./pages/News/NewsDetails'));
 const News = lazy(() => import('./pages/News/News'));
 const AdminRouter = lazy(() => import('./pages/Admin/AdminRouter'));
 const Login = lazy(() => import('./pages/Auth/Login'));
-const TimeTables = lazy(() => import('./pages/TimeTables/TimeTables'));
+const AdminTimeTables = lazy(() => import('./pages/Admin/AdminTimeTables/AdminTimeTables'));
+const StudentTimeTables = lazy(() => import('./pages/StudentTimeTables'));
 const Root = () => {
   return (
     <ErrorBoundary>
@@ -83,10 +84,18 @@ const Root = () => {
                 }
               />
               <Route
+                path="timetables"
+                element={
+                  <GuardAuthenticated>
+                    <AdminTimeTables />
+                  </GuardAuthenticated>
+                }
+              />
+              <Route
                 path="timetable"
                 element={
                   <GuardAuthenticated>
-                    <TimeTables />
+                    <StudentTimeTables />
                   </GuardAuthenticated>
                 }
               />

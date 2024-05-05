@@ -1,7 +1,7 @@
 import { Heading } from "@chakra-ui/react";
-import { Page, PageContent } from "../../components/Page";
+import { Page, PageContent } from "../../../components/Page";
 
-import { TimeTable } from "../../components/TimeTable";
+import { TimeTable } from "../../../components/TimeTable";
 
 const TimeTables = () => {
 
