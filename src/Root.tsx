@@ -12,6 +12,7 @@ import { SignUpStudent } from './pages/Auth/SignUpStudent';
 import { SignUpTeacher } from './pages/Auth/SignUpTeacher';
 import { Courses } from './pages/Courses/Courses';
 import { CourseDetails } from './pages/Courses/CourseDetails';
+import { GuardStudent } from './pages/Auth/GuardStudent';
 
 const NewsDetails = lazy(() => import('./pages/News/NewsDetails'));
 const News = lazy(() => import('./pages/News/News'));
@@ -86,17 +87,17 @@ const Root = () => {
               <Route
                 path="timetables"
                 element={
-                  <GuardAuthenticated>
+                  <GuardAdmin>
                     <AdminTimeTables />
-                  </GuardAuthenticated>
+                  </GuardAdmin>
                 }
               />
               <Route
                 path="timetable"
                 element={
-                  <GuardAuthenticated>
+                  <GuardStudent>
                     <StudentTimeTables />
-                  </GuardAuthenticated>
+                  </GuardStudent>
                 }
               />
               <Route

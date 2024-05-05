@@ -8,7 +8,7 @@ import { useAccount } from '../pages/Auth/service';
 
 
 export const MainMenu = ({ ...rest }) => {
-  const {isAdmin} = useAccount();
+  const {isAdmin,isStudent} = useAccount();
   return (
     <Stack direction="column" spacing="0.5" w="90%" {...rest} overflowY="auto" maxH="65vh">
       {!!isAdmin&&<MainMenuItem to="/admin/users">Users</MainMenuItem>}
@@ -17,7 +17,8 @@ export const MainMenu = ({ ...rest }) => {
       <MainMenuItem to="/news">News</MainMenuItem>
       <MainMenuItem to="/catchup">Catch-up</MainMenuItem>
       <MainMenuItem to="/courses">Courses</MainMenuItem>
-      <MainMenuItem to="/timetable">Time table</MainMenuItem>
+      {!!isAdmin && <MainMenuItem to="/timetables">Time tables</MainMenuItem>}
+      {!!isStudent && <MainMenuItem to="/timetable">Time table</MainMenuItem>}
       <MainMenuItem to="/grades">Grades</MainMenuItem>
       <MainMenuItem to="/chatroom">Chatroom</MainMenuItem>
       <MainMenuItem to="/feedbak">Feedback</MainMenuItem>
@@ -42,7 +43,7 @@ const MainMenuItem = ({ to,icon,children, ...rest }: BoxProps & { to: string,ico
       fontWeight="bold"
       borderRadius="xl"
       shadow={isActive?"xl":"none"}
-      fontSize={{ base: 'lg', md: 'xl' }}
+      fontSize={{ base: 'lg', md: 'md' }}
       color={isActive ? 'gray.50' : 'gray.600'}
       px="4"
       py="2"
