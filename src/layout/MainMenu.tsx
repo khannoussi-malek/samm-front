@@ -38,7 +38,7 @@ const MainMenuItem = ({ to,icon,children, ...rest }: BoxProps & { to: string,ico
       to={to}
       justifyContent="flex-start"
       position="relative"
-      bg={isActive ? 'blue.700' : 'transparent'}
+      bg={isActive ? '#01B3EF' : 'transparent'}
       opacity={isActive ? 1 : 0.8}
       fontWeight="bold"
       borderRadius="xl"
@@ -50,9 +50,9 @@ const MainMenuItem = ({ to,icon,children, ...rest }: BoxProps & { to: string,ico
       _active={{ bg: 'gray.300' }}
       _hover={{
         shadow: "sm",
-        bg: isActive ? 'blue.700' : 'gray.90',
+        bg: isActive ? 'blue.300' : 'gray.90',
         _after: {
-          opacity: 1,
+          opacity: 0.5,
           w: '2rem',
         },
       }}

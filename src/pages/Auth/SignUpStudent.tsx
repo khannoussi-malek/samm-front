@@ -5,7 +5,7 @@ import { Formiz, useForm } from "@formiz/core";
 import { PhoneInput } from "../../components/PhoneInput";
 import { useState } from "react";
 import { useRegisterStudent, RegisterStudentPayload } from "./Auth.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export const SignUpStudent = () => {
 
     const toastSuccess = useToast();
@@ -19,7 +19,7 @@ export const SignUpStudent = () => {
             });
             navigate('/login')
         },
-        onError:(error)=>{
+        onError: (error) => {
             toastSuccess({
                 title: error.response.data.message[0] || "error",
                 status: 'error',
@@ -31,13 +31,14 @@ export const SignUpStudent = () => {
             createStudent(values);
         },
     });
-    
+
     const [description, setDescription] = useState('1')
     return (
         <Box h="100vh" display="flex" justifyContent="center" alignItems="center" bg="#017da7">
             <Flex h="90vh" width="80%" >
                 <Center width="full" bgColor="blue.200" boxShadow="lg">
                     <Image src="./images/uni.png" alt="university image" />
+                    <Text as={Link} to="/Login.tsx" fontWeight="100" fontSize="sm" textDecoration="underline" color="#E14177" position="absolute" top="80px">You have Account ? Login</Text>
                 </Center>
                 <Center width="full" bg="gray.50" >
                     <Flex flexDirection="column" borderRadius="xl" shadow="lg" p="8" h="full" w="full" justifyContent="center" >
@@ -98,7 +99,7 @@ export const SignUpStudent = () => {
                                             placeholder="reset your password"
                                             type="password"
                                             required="Password is required"
-                                        
+
                                         />
                                     </HStack>
                                     <PhoneInput
@@ -106,7 +107,7 @@ export const SignUpStudent = () => {
                                         label="phone number"
                                         placeholder="Enter your phone number"
                                         type="name"
-                                        required="surname is required"    
+                                        required="surname is required"
                                         validations={[
                                             {
                                                 handler: isNumber(),
@@ -142,13 +143,13 @@ export const SignUpStudent = () => {
                                             placeholder="place your Passeport number"
                                             type="number"
                                             required="Passeport is required"
-                                            
+
                                         />}
                                     <HStack justifyContent="space-evenly">
                                         <Button type="submit" colorScheme="blue" width="40%">
                                             Sign Up
                                         </Button>
-                                        <Button type="reset" onClick={()=>navigate(-1)} colorScheme="pink" width="40%">
+                                        <Button type="reset" onClick={() => navigate(-1)} colorScheme="pink" width="40%">
                                             Cancel
                                         </Button>
                                     </HStack>

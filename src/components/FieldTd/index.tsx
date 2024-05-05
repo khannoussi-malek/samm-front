@@ -27,7 +27,7 @@ export const FieldTd: FC<FieldTdProps> = ({ tdList, title, ...rest }) => {
                 {tdList?.filter(
                     (_, key) => key < 4
                 ).map((chapter) => (
-                    <ChapterCard title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} minW="9rem" />
+                    <ChapterCard as={Link} title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} minW="9rem" />
                 ))}
 
             </Stack>

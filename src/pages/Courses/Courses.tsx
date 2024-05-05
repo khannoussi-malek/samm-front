@@ -2,10 +2,11 @@ import { Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
 import { Select } from "chakra-react-select";
 import { Page, PageContent } from "../../components/Page";
 import { SubjectCard } from "../../components/SubjectCard";
-import { groupsOptions } from "./CourseForm";
-import { CourseUpdateModal } from "./CourseUpdateModal";
+import { groupsOptions } from "./ChapterForm";
+import { CourseCreateModal } from "./CourseCreateModal";
 import { useGetCourses } from "./courses.service";
 import { useAccount } from "../Auth/service";
+import { majorsOptions } from "./CourseForm";
 
 export const Courses = () => {
     const { courses, isLoading, isError, refetch } = useGetCourses();
@@ -18,11 +19,11 @@ export const Courses = () => {
                 <Heading marginBottom="2rem" color="#F9FAF9">
                     All Courses
                 </Heading>
-                {isAdmin && <Stack  direction="row" justifyContent="space-between" marginBottom="1rem" width="8xl">
-                    <Select  onChange={(e) => { console.log("choosing group") }} placeholder='Select option' options={groupsOptions}>
+                {!isAdmin && <Stack direction="row" justifyContent="space-between" marginBottom="1rem" width="8xl">
+                    <Select onChange={(e) => { console.log("choosing group") }} placeholder='Select option' options={majorsOptions}>
                     </Select>
 
-                <CourseUpdateModal isForCreate />
+                    <CourseCreateModal />
                 </Stack>}
                 {isLoading && <Center>
                     <Spinner />

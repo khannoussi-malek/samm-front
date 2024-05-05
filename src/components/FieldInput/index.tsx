@@ -16,7 +16,7 @@ export type FieldInputProps<FormattedValue = Value> = FieldProps<
     inputProps?: Omit<InputProps, UsualInputProps>;
   };
 
-export const FieldInput = <FormattedValue = Value>(props: FieldInputProps<FormattedValue>) => {
+export const FieldInput = <FormattedValue = Value >(props: FieldInputProps<FormattedValue>) => {
   const field = useField(props);
   const { inputProps, children, placeholder, type, autoFocus, ...rest } = field.otherProps;
 

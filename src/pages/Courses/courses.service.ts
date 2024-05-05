@@ -1,6 +1,6 @@
 import { useMutation, UseMutationOptions, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import Axios, { AxiosError } from "axios";
-import { CourseType } from "./courses.type";
+import { Chapter, CourseType } from "./courses.type";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 const factoryKeyCourse = {
@@ -64,6 +64,21 @@ export const useCreateCourse = (config: UseMutationOptions<CourseType, AxiosErro
     });
 };
 
+export const useCourseUpdate = (
+    config: UseMutationOptions<CourseType, AxiosError, CourseType> = {}
+  ) => {
+    const queryClient = useQueryClient();
+    return useMutation((payload) => Axios.patch("/subjects/"+payload.id, payload), {
+      ...config,
+      onSuccess: (data, payload, ...rest) => {
+        queryClient.invalidateQueries();
+        if (config.onSuccess) {
+          config.onSuccess(data, payload, ...rest);
+        }
+      },
+    });
+  };
+
 export const useCourseDetails = (id: number, queryOptions: GetCourseQueryOptions = {}) => {
     const query = useQuery({
         queryKey: coursKeys.get(id).queryKey,
@@ -74,4 +89,32 @@ export const useCourseDetails = (id: number, queryOptions: GetCourseQueryOptions
         ...queryOptions,
     });
     return { ...query, course: query.data };
+};
+
+export const useGetChapter = (config: UseQueryOptions<
+    { data: CourseType[] },
+    AxiosError
+> = {}) => {
+    const result = useQuery(
+        factoryKeyCourse.courses(),
+        (): Promise<any> => Axios.get('/subjects'), config
+    );
+
+    return {
+        courses: result?.data?.data || [],
+        ...result,
+    };
+};
+
+export const useCreateChapter = (config: UseMutationOptions<Chapter, AxiosError<any>, Chapter> = {}) => {
+    const queryClient = useQueryClient();
+    return useMutation(async (payload) => await Axios.post("/chapters", payload), {
+        ...config,
+        onSuccess: (data, payload, ...rest) => {
+            queryClient.invalidateQueries();
+            if (config.onSuccess) {
+                config.onSuccess(data, payload, ...rest);
+            }
+        },
+    });
 };

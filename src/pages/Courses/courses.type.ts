@@ -14,6 +14,7 @@ export type Chapter = {
     name: string;
     order: number;
     pages: number;
+    type: string;
     courseFiles: CourseFile[];
 }
 

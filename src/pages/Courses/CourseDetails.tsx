@@ -11,8 +11,8 @@ import { FieldGradesStudent } from "../../components/FieldGradesStudent";
 import { LuArrowRight } from "react-icons/lu";
 import { FieldCourseProgress } from "../../components/FieldCouseProgress";
 import { Select } from "chakra-react-select";
-import { CourseUpdateModal } from "./CourseUpdateModal";
-import { groupsOptions } from "./CourseForm";
+import { ChapterCreateModal } from "./ChapterCreateModal";
+import { groupsOptions } from "./ChapterForm";
 
 
 
@@ -31,7 +31,7 @@ export const CourseDetails = () => {
                     <Select onChange={(e) => { console.log("choosing group") }} placeholder='Select option' options={groupsOptions}>
                     </Select>
 
-                    <CourseUpdateModal isForCreate />
+                    <ChapterCreateModal />
                 </Stack>}
                 <PageContent>
                     <HStack marginBottom="1rem" >
@@ -47,14 +47,14 @@ export const CourseDetails = () => {
                     </Center>}
 
                     {isSuccess && <Stack gap="8"> <Stack gap="8" spacing={0} flexDirection="row" wrap="wrap" >
-                        {course.chapters.length > 0 && (course.chapters || [])?.map((chapter) => (
-                            <ChapterCard title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} />
+                        {course.chapters.length > 0 && (course.chapters || [])?.filter((v) => v.type == "Cours")?.map((chapter) => (
+                            <ChapterCard as={Link} title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} onClick={()=> window.open("https://issatso.rnu.tn/bo/storage/app/public/courses/wJRcpOIKFtumAQxoNNfAzJWMqd8ymW3npeBoM9eB.pdf","_blank")} />
                         ))}
                     </Stack>
                         <HStack w="full" alignItems="flex-start" gap={6}>
                             <Stack gap={6}>
-                                <FieldTd tdList={course.chapters} title="TD" />
-                                <FieldTd tdList={course.chapters} title="TP" />
+                                <FieldTd tdList={course.chapters.filter((v) => v.type == "td")} title="TD" />
+                                <FieldTd tdList={course.chapters.filter((v) => v.type == "tp")} title="TP" />
                             </Stack>
                             <Stack gap={6} alignItems="flex-start">
                                 {!!isStudent && <FieldAbsence nombreAbsence={2} nombreHeuresTotale={48} />}
@@ -74,7 +74,7 @@ export const CourseDetails = () => {
                     <ModalBody>
                         <Stack>
                             <Stack gap="2" spacing={0} flexDirection="row" wrap="wrap">
-                                {course?.chapters?.map((chapter) => (
+                                {course?.chapters?.filter((v) => v.type == "Cours").map((chapter) => (
                                     <ChapterCard title={chapter?.name || ''} order={chapter?.order || 0} pages={chapter?.pages || 0} minW="9rem" />
                                 ))}
                             </Stack>

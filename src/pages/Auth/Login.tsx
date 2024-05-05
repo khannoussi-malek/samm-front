@@ -84,7 +84,10 @@ const isMobile = useBreakpointValue({base:true,md:false})
                             </AbsoluteCenter>
                         </Box> */}
                         <Button colorScheme="pink" onClick={() => { navigate('/signupStudent') }}>
-                            Sign Up
+                            Sign Up As Student
+                        </Button>
+                        <Button colorScheme="pink" onClick={() => { navigate('/signupTeacher') }}>
+                            Sign Up As Teacher
                         </Button>
                     </Stack>
                 </Center>

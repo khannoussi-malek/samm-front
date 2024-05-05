@@ -13,7 +13,7 @@ export const FieldAbsence: FC<FieldAbsenceProps> = ({ nombreAbsence, nombreHeure
         <Center minW="30rem" bg='rgba(109, 207, 251, 0.3)' borderRadius="37" p="3" {...rest}>
             <Stack alignItems="center">
                 <CircularProgress value={val} color='#E14177' size="8rem">
-                    <CircularProgressLabel display="inilne" fontWeight="bold" color="#01427A">60%</CircularProgressLabel>
+                    <CircularProgressLabel display="inilne" fontWeight="bold" color="#01427A">{val}%</CircularProgressLabel>
                 </CircularProgress>
                 <HStack alignItems="center">
                     <Text fontSize="3rem" color="#E14177" fontWeight="bold">{absenceRest}<Text display="inline" fontSize="3rem" color="#E14177" fontWeight="bold">h</Text></Text>
