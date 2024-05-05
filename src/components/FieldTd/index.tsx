@@ -1,11 +1,10 @@
-import { Box, Center, HStack, Stack, StackProps, Text } from "@chakra-ui/react";
-import { Chapter, CourseType } from "../../pages/Courses/courses.type";
+import { Center, HStack, Stack, StackProps, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { CiViewList } from "react-icons/ci";
-import { ChapterCard } from "../ChapterCard";
 import { LuArrowRight } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { IconType } from "react-icons/lib";
+import { Chapter } from "../../pages/Courses/courses.type";
+import { ChapterCard } from "../ChapterCard";
 
 type FieldTdProps = StackProps & {
     title?: string;
@@ -13,7 +12,7 @@ type FieldTdProps = StackProps & {
 }
 export const FieldTd: FC<FieldTdProps> = ({ tdList,title, ...rest }) => {
     return (
-        <Stack maxW="40rem" bg='rgba(250, 251, 251, 0.6)' borderRadius="37" p="4" >
+        <Stack minW="50rem" bg='rgba(250, 251, 251, 0.6)' borderRadius="37" p="4" >
             <HStack pb="5" justifyContent="space-between">
                 <HStack >
                     <Center bg="#6DCFFB" p="1" borderRadius="full" w="3rem" h="3rem"><CiViewList size="2rem" color="#ffffff" /></Center>
