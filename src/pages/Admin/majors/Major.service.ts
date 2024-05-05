@@ -53,3 +53,15 @@ export const useMajorUpdate = (config: UseMutationOptions<Major,AxiosError,Major
 
     });
 }
+
+
+
+export const uploadMutation = (config: UseMutationOptions<{file:File},AxiosError,any>={}) => {
+    
+    return useMutation((payload) => Axios.post("/update",payload,  {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }), config);
+}
+
