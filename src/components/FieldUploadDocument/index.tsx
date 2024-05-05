@@ -33,6 +33,7 @@ export interface FieldUploadDocumentProps extends FieldProps {
   sectionLabel?: string;
   accept?: string;
   menu: ReactElement<UploadMenuProps>;
+  onUpdate: (file: File) => void;
 }
 
 export const FieldUploadDocument = forwardRef<
@@ -67,6 +68,7 @@ export const FieldUploadDocument = forwardRef<
       isLoadingUpload,
       maxSize = 5_000_000, // = 5 Mo
       messageFileTooLarge,
+      onUpdate,
       ...rest
     } = otherProps;
     const showError = !isValid && isSubmitted;
@@ -120,6 +122,7 @@ export const FieldUploadDocument = forwardRef<
         return;
       }
 
+      onUpdate({file});
       setValue(file);
     };
 

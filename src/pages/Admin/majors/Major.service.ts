@@ -53,3 +53,30 @@ export const useMajorUpdate = (config: UseMutationOptions<Major,AxiosError,Major
 
     });
 }
+
+
+
+export const uploadMutation = (config: UseMutationOptions<{file:File},AxiosError,any>={}) => {
+    
+    return useMutation((payload) => Axios.post("/update",payload,  {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }), config);
+}
+
+
+export const useDeleteFile = (config: UseMutationOptions<Major,AxiosError,Major>={}) => {
+
+    const queryClient = useQueryClient();
+    return useMutation((id) => Axios.delete("/majors/" + id), {
+        ...config,
+        onSuccess: (data, id, ...rest) => {
+            queryClient.invalidateQueries();
+            if (config.onSuccess) {
+                config.onSuccess(data, id, ...rest);
+            }
+        }
+    });
+}
+

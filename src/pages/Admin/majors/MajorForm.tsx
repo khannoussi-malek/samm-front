@@ -1,28 +1,49 @@
 import { Button, Stack, StackProps, useDisclosure } from "@chakra-ui/react";
 import { FC } from "react";
+import { ConfirmDialog } from "../../../components/ConfirmDialog";
 import { FieldInput } from "../../../components/FieldInput";
 import { FieldUploadDocument } from "../../../components/FieldUploadDocument";
 import { UploadMenu } from "../../../components/UploadMenu";
-import { ConfirmDialog } from "../../../components/ConfirmDialog";
+import { uploadMutation, useDeleteFile } from "./Major.service";
+import { useQueryClient } from "@tanstack/react-query";
 
 type MajorFormProps = StackProps & {
+  setPlan :(values: number)=>void
+  plan: number
     
 };
-export const MajorForm: FC<MajorFormProps> = ({...rest}) => {
+export const MajorForm: FC<MajorFormProps> = ({setPlan,plan,...rest}) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const handleDeleteDocument = async () => {
+  const {
+    mutate: deleteDocument,
+  }=useDeleteFile({
+    onSuccess: () => {
     onClose();
+    setPlan(0);
+    }
+  })
+  const queryClient = useQueryClient();
+  const {
+    mutate: uploadDocument,
+    isLoading: uploadMutationDocument,
+  } = uploadMutation(
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries();
+        setPlan(data?.data?.id)
+
+      }
+    }
+  )
+  const handleDeleteDocument = async () => {
+    deleteDocument(plan)
   };
+
+  
   const handleOnDelete = () => {
     onOpen();
   };
-  const handleUploadFile = (file: File) => {
-    if (!!file?.name) {
-      console.log("File",{
-        file,
-      });
-    }
-  };
+  
     return (<Stack {...rest}>
         <FieldInput
             name="name"
@@ -31,25 +52,26 @@ export const MajorForm: FC<MajorFormProps> = ({...rest}) => {
             type="name"
             required="name is required"
         />
+      
         <FieldUploadDocument
-            name="plan"
-          completed={7}
-          onChange={(e)=>{handleUploadFile(e)}}
+            name="fiel"
+            completed={7}
+            onUpdate={uploadDocument}
             label="plan"
             placeholder="Enter your plan"
             type="plan"
-            required="plan is required"
             accept="application/pdf,.pdf"
             sectionLabel="Upload your plan in"
             menu={
                 <UploadMenu
-                  isLoading={false}
+                  isLoading={uploadMutationDocument}
                   size="md"
                   onDelete={()=>{handleOnDelete()}}
                   onDownload={()=>{}}
                 />
               }
         />
+    
 
       {isOpen && (
         <>
