@@ -18,6 +18,7 @@ import { useLayoutContext } from '../components/Viewport/LayoutContext';
 import { AccountMenu } from './AccountMenu';
 import { MainMenu } from './MainMenu';
 import { NavDrawer } from './NavDrawer';
+import { dropPoint } from '@tiptap/pm/transform';
 
 const MenuButton = (props: Partial<IconButtonProps>) => {
   const { navOnOpen,navOnClose, navIsOpen} = useLayoutContext();
@@ -65,7 +66,8 @@ export const TopBar = () => {
           px="4"
           py="8"
           h="full"
-           bg="blue.50"
+          bg="#FAFBFB"
+          boxShadow="2xl"
           w="20rem"
           _dark={{ bg: 'gray.900' }}
           direction="column"
@@ -77,7 +79,7 @@ export const TopBar = () => {
           gap='4' 
           alignItems="center">
         <Logo />
-          <Text mt="4"color="blue.800" fontWeight="bold" fontSize="4xl">SAMM</Text>
+          <Text color="#01427A" fontWeight="bold" fontSize="4xl">SAMM</Text>
           </HStack>
           <Box me="auto" ms="4" display={{ base: 'none', md: 'flex' }} />
            <MainMenu me="auto" ms="4" display={{ base: 'none', md: 'flex' }} /></Stack>

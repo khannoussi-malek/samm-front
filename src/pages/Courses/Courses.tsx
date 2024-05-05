@@ -13,7 +13,7 @@ export const Courses = () => {
     return (
         <Page containerSize="full">
             <PageContent  >
-                <Heading marginBottom="2rem">
+                <Heading marginBottom="2rem" color="#F9FAF9">
                     All Courses
                 </Heading>
                 <Stack direction="row" justifyContent="space-between" marginBottom="1rem" width="8xl">

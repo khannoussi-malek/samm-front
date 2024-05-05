@@ -3,14 +3,14 @@ import {
   UseQueryOptions,
   useQuery
 } from '@tanstack/react-query';
-import Axios  from 'axios';
+import Axios from 'axios';
 
 
 export const accountKeys = createQueryKeys('accountService', {
   account: ["account"],
 });
 
-export type role = 'teacher' | 'Student'|'Admin'
+export type role = 'teacher' | 'Student' | 'Admin'
 export type User = {
   id: number;
   nom: string;
@@ -25,15 +25,17 @@ export type User = {
 type UseAccountQueryOptions = UseQueryOptions<User>;
 
 export const useAccount = (queryOptions: UseAccountQueryOptions = {}) => {
-   const query = useQuery({
-     queryKey: accountKeys.account.queryKey,
-     queryFn: async () => {
-       const response = await Axios.get('/auth/info');
-       return response?.data;
-     },
-     ...queryOptions,
-   });
-   const isAdmin = query.data?.role === 'Admin';
-   return { isAdmin, ...query };
+  const query = useQuery({
+    queryKey: accountKeys.account.queryKey,
+    queryFn: async () => {
+      const response = await Axios.get('/auth/info');
+      return response?.data;
+    },
+    ...queryOptions,
+  });
+  const isAdmin = query.data?.role === 'Admin';
+  const isTeacher = query.data?.role === 'teacher';
+  const isStudent = query.data?.role === 'Student';
+  return { isAdmin, isTeacher, isStudent, ...query };
 };
 
