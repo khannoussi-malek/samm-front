@@ -5,9 +5,11 @@ import { SubjectCard } from "../../components/SubjectCard";
 import { groupsOptions } from "./CourseForm";
 import { CourseUpdateModal } from "./CourseUpdateModal";
 import { useGetCourses } from "./courses.service";
+import { useAccount } from "../Auth/service";
 
 export const Courses = () => {
     const { courses, isLoading, isError, refetch } = useGetCourses();
+    const { isAdmin } = useAccount();
     console.log(courses)
 
     return (
@@ -16,12 +18,12 @@ export const Courses = () => {
                 <Heading marginBottom="2rem" color="#F9FAF9">
                     All Courses
                 </Heading>
-                <Stack direction="row" justifyContent="space-between" marginBottom="1rem" width="8xl">
-                    <Select onChange={(e) => { console.log("choosing group") }} placeholder='Select option' options={groupsOptions}>
+                {isAdmin && <Stack  direction="row" justifyContent="space-between" marginBottom="1rem" width="8xl">
+                    <Select  onChange={(e) => { console.log("choosing group") }} placeholder='Select option' options={groupsOptions}>
                     </Select>
 
                 <CourseUpdateModal isForCreate />
-                </Stack>
+                </Stack>}
                 {isLoading && <Center>
                     <Spinner />
                 </Center>}
