@@ -5,6 +5,7 @@ import { FieldInput } from "../../../components/FieldInput";
 import { FieldUploadDocument } from "../../../components/FieldUploadDocument";
 import { UploadMenu } from "../../../components/UploadMenu";
 import { uploadMutation, useDeleteFile } from "./Major.service";
+import { useQueryClient } from "@tanstack/react-query";
 
 type MajorFormProps = StackProps & {
   setPlan :(values: number)=>void
@@ -21,14 +22,16 @@ export const MajorForm: FC<MajorFormProps> = ({setPlan,plan,...rest}) => {
     setPlan(0);
     }
   })
-
+  const queryClient = useQueryClient();
   const {
     mutate: uploadDocument,
     isLoading: uploadMutationDocument,
   } = uploadMutation(
     {
       onSuccess: (data) => {
+        queryClient.invalidateQueries();
         setPlan(data?.data?.id)
+
       }
     }
   )
